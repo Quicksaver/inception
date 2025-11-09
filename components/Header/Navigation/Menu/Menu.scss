@@ -1,0 +1,69 @@
+@use 'scss/breakpoint' as *;
+
+.header-navigation-menu {
+  position: relative;
+  grid-area: navigation;
+
+  @include breakpoint(until-landscape) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--color-grey-500);
+    background-color: var(--background-color);
+  }
+
+  menu {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+
+    @include breakpoint(until-landscape) {
+      flex-direction: column;
+      gap: 0;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    li {
+      list-style: none;
+    }
+  }
+}
+
+.header-navigation-menu__link {
+  display: block;
+  text-decoration: none;
+
+  @include breakpoint(until-landscape) {
+    position: relative;
+    padding: 16px var(--container-padding-x);
+    text-align: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - (var(--container-padding-x) * 2));
+      height: 1px;
+      background-color: var(--color-grey-200);
+    }
+  }
+
+  &:hover,
+  .header-navigation-menu__item--active & {
+    text-decoration: underline;
+  }
+}
+
+.header-navigation-menu__user {
+  @include breakpoint(until-landscape) {
+    padding: var(--container-padding-y) var(--container-padding-x);
+
+    .button {
+      width: 100%;
+    }
+  }
+}

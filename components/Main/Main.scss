@@ -1,0 +1,10 @@
+.main {
+  --main-gap: 60px;
+
+  overflow-x: clip;
+  display: flex;
+  flex: 1 0 100%;
+  flex-direction: column;
+  gap: var(--main-gap);
+  padding: 0;
+}

@@ -1,0 +1,41 @@
+@use 'scss/breakpoint' as *;
+
+.blog-list {
+  --container-padding-y: 48px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--container-padding-y);
+
+  @include breakpoint(until-tablet) {
+    --container-padding-y: 32px;
+  }
+}
+
+.blog-list__featured {
+  @include breakpoint(tablet) {
+    padding-bottom: var(--container-padding-y);
+    border-bottom: 1px solid var(--color-grey-200);
+  }
+}
+
+.blog-list__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--container-padding-y);
+
+  @include breakpoint(until-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(until-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blog-list__empty {
+  padding: 80px 0;
+  font-size: var(--font-size-body-large);
+  color: var(--color-grey-700);
+  text-align: center;
+}

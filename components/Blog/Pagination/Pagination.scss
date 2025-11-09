@@ -1,0 +1,50 @@
+@use 'scss/breakpoint' as *;
+
+.blog-pagination {
+  padding-bottom: 48px;
+
+  @include breakpoint(until-tablet) {
+    padding-bottom: 32px;
+  }
+
+  .pagination-item__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-label);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+
+    svg {
+      width: 12px;
+    }
+  }
+
+  .pagination-item__link--previous {
+    svg {
+      transform: rotate(90deg);
+    }
+
+    &:hover {
+      svg {
+        border-right: 1px solid currentcolor;
+      }
+    }
+  }
+
+  .pagination-item__link--next {
+    /* stylelint-disable-next-line no-descending-specificity */
+    svg {
+      transform: rotate(-90deg);
+    }
+
+    &:hover {
+      svg {
+        border-left: 1px solid currentcolor;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@use 'scss/alpha' as *;
+@use 'scss/breakpoint' as *;
+
+.header-navigation {
+  position: fixed;
+  z-index: calc(var(--z-header) + 1);
+  top: var(--header-height);
+  left: 0;
+  overflow-y: auto;
+  width: 100vw;
+  height: calc(100vh - var(--header-height));
+  border-top: 1px solid var(--color-grey-200);
+  background-color: alpha(var(--color-black), 0.1);
+  backdrop-filter: blur(4px);
+
+  @include breakpoint(landscape) {
+    display: none;
+  }
+}
+
+.header-navigation__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background-color: alpha(var(--color-black), 0.1);
+  backdrop-filter: blur(4px);
+
+  @include breakpoint(landscape) {
+    display: none;
+  }
+}
+
+.header-navigation__menu--desktop {
+  @include breakpoint(until-landscape) {
+    display: none;
+  }
+}

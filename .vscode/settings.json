@@ -1,0 +1,80 @@
+{
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "cSpell.words": [
+    "Brevo",
+    "cookieless",
+    "FIRSTNAME",
+    "getbrevo",
+    "jetshare",
+    "jetshared",
+    "LASTNAME",
+    "portabletext",
+    "POSTHOG",
+    "toastify",
+    "uuidv",
+    "xlight",
+    "xxlight"
+  ],
+  "css.format.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "evenBetterToml.formatter.indentEntries": true,
+  "evenBetterToml.formatter.reorderKeys": true,
+  "evenBetterToml.formatter.trailingNewline": true,
+  "evenBetterToml.schema.enabled": true,
+  "files.insertFinalNewline": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": true,
+  "json.format.enable": true,
+  "json.validate.enable": true,
+  "markdown.extension.toc.omittedFromToc": {
+    "README.md": [
+      "# JetShare Webapp"
+    ],
+  },
+  "prettier.configPath": "prettier.config.mjs",
+  "prettier.enable": true,
+  "prettier.ignorePath": ".prettierignore",
+  "scss.format.enable": false,
+  "scss.validate": true,
+  "stylelint.enable": true,
+  "stylelint.packageManager": "yarn",
+  "stylelint.snippet": [
+    "css",
+    "less",
+    "postcss",
+    "scss"
+  ],
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "scss"
+  ],
+  "typescript.format.enable": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.validate.enable": true,
+  "yaml.format.printWidth": 120,
+  "yaml.format.singleQuote": true
+}

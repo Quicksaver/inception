@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+ol {
+  counter-reset: list-counter;
+
+  > li {
+    --li-bullet-size: 22px;
+
+    counter-increment: list-counter;
+    position: relative;
+    margin-left: var(--li-bullet-size);
+
+    &::before {
+      content: counter(list-counter) '.';
+      position: absolute;
+      top: 0;
+      left: calc(-1 * var(--li-bullet-size));
+      width: var(--li-bullet-size);
+      height: var(--li-bullet-size);
+      line-height: var(--li-bullet-size);
+      color: var(--color-white);
+    }
+  }
+}

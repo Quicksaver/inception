@@ -1,0 +1,7 @@
+export default function getBaseUrl(): string {
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+
+  return process.env.NEXT_PUBLIC_ORIGIN || 'http://localhost:3000';
+}

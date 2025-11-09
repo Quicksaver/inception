@@ -1,0 +1,37 @@
+$breakpoints: (
+  'fullhd': 1920px,
+  'wide': 1680px,
+  'large': 1440px,
+  'desktop': 1200px,
+  'landscape': 992px,
+  'tablet': 840px,
+  'portrait': 768px,
+  'mobile': 600px,
+  'small': 472px,
+  'tiny': 425px,
+);
+
+@mixin breakpoint($size) {
+  $before: 99999px;
+
+  @each $name, $breakpoint in $breakpoints {
+    $until: #{$breakpoint - 0.1px};
+
+    @if $size == $name {
+      @media (min-width: $breakpoint) {
+        @content;
+      }
+    } @else if $size == until-#{$name} {
+      @media (max-width: $until) {
+        @content;
+      }
+    } @else if $size == only-#{$name} {
+      @media (min-width: $breakpoint) and (max-width: $before) {
+        @content;
+      }
+    }
+
+    /* stylelint-disable-next-line order/order, scss/no-duplicate-dollar-variables */
+    $before: #{$until};
+  }
+}

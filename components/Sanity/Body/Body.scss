@@ -1,0 +1,150 @@
+.sanity-body {
+  --sanity-body-gap: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sanity-body-gap);
+  align-items: flex-start;
+  width: 100%;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-top: calc(var(--sanity-body-gap) * 1.2);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    align-self: center;
+    font-size: var(--font-size-h5);
+    text-align: center;
+  }
+
+  h2 {
+    font-size: var(--font-size-h5);
+    color: var(--color-brand-light);
+  }
+
+  h3 {
+    font-size: var(--font-size-h6);
+    color: var(--color-brand-light);
+  }
+
+  h4 {
+    font-size: var(--font-size-body-large);
+    color: var(--color-brand-light);
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--color-brand-light);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  > :not(.sanity-code) code {
+    padding: 0.1em;
+    border: 1px solid var(--color-brand-light);
+    border-radius: 0.1em;
+    line-height: 1.4375;
+    color: var(--color-brand-secondary);
+  }
+
+  ul,
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--sanity-body-gap) / 2);
+    align-items: flex-start;
+    margin-bottom: calc(var(--sanity-body-gap) * 1.2);
+
+    > li {
+      position: relative;
+      margin-left: 0;
+      padding-left: 2em;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0.25em;
+        color: var(--color-brand-light);
+      }
+    }
+  }
+
+  ul {
+    > li {
+      &::before {
+        content: '•';
+      }
+    }
+  }
+
+  ol {
+    > li {
+      &::before {
+        content: counter(list-counter) '.';
+      }
+    }
+  }
+
+  li {
+    > ul,
+    > ol {
+      margin-top: calc(var(--sanity-body-gap) / 2);
+      margin-bottom: 0;
+    }
+  }
+
+  figure {
+    position: relative;
+    align-self: center;
+    width: 100%;
+    max-width: min(700px, 95%);
+
+    img {
+      width: 100%;
+      border-radius: var(--theme-border-radius);
+    }
+
+    figcaption {
+      margin-top: calc(var(--sanity-body-gap) / 2.5);
+      font-size: var(--font-size-label);
+      color: var(--color-brand-faded);
+      text-align: center;
+    }
+  }
+
+  blockquote {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding-left: 2.5em;
+    border-left: 0.1em solid var(--color-brand-light);
+
+    .icon-quote {
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      width: 2em;
+      height: 2em;
+      color: var(--color-grey-400);
+    }
+
+    p {
+      position: relative;
+    }
+
+    cite {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: var(--color-grey-800);
+    }
+  }
+}

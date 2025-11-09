@@ -1,0 +1,51 @@
+@use 'scss/breakpoint' as *;
+
+.footer-navigation {
+  display: flex;
+  gap: 48px;
+  justify-content: flex-start;
+
+  @include breakpoint(until-desktop) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @include breakpoint(until-mobile) {
+    gap: 32px;
+    justify-content: flex-start;
+  }
+
+  menu {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+
+    li {
+      list-style: none;
+    }
+  }
+}
+
+.footer-navigation__block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 150px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+
+  menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .link {
+      text-decoration: none;
+    }
+  }
+}
+
+.footer-navigation__block-label {
+  display: none;
+  font-weight: 700;
+}

@@ -1,0 +1,162 @@
+name: 'Deploy on Vercel'
+
+on:
+  workflow_call:
+    inputs:
+      alias:
+        description: 'The path that will link to this deploy'
+        required: true
+        type: string
+      context:
+        description: 'The vercel context we should use (preview, production)'
+        required: true
+        type: string
+      environment:
+        description: 'The environment we are deploying'
+        required: true
+        type: string
+      name:
+        description: 'The name to use for the workflow step'
+        required: true
+        type: string
+      prefix:
+        description: 'The prefix for this workflow run'
+        required: true
+        type: string
+      sha:
+        description: 'The unique sha to attach the status to'
+        required: true
+        type: string
+    secrets:
+      VERCEL_ORG_ID:
+        required: true
+      VERCEL_PROJECT_ID:
+        required: true
+      VERCEL_TOKEN:
+        required: true
+
+concurrency:
+  group: deploy-on-vercel-${{ github.workflow }}-${{ inputs.environment }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  deploy:
+    name: ${{ inputs.name }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: '🛒 Checkout Project'
+        uses: actions/checkout@v5.0.0
+
+      - name: '📩 Restore Nextjs cache'
+        uses: actions/cache@v4.3.0
+        with:
+          path: .next
+          key: cache-nextjs-${{ runner.os }}-${{ inputs.environment }}-${{ inputs.prefix }}-${{ inputs.sha }}
+          restore-keys: |
+            cache-nextjs-${{ runner.os }}-${{ inputs.environment }}-${{ inputs.prefix }}-
+            cache-nextjs-${{ runner.os }}-${{ inputs.environment }}-
+
+      - name: '📩 Restore node_modules cache'
+        id: node_modules_cache
+        uses: actions/cache@v4.3.0
+        with:
+          path: node_modules
+          key: cache-node_modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            cache-node_modules-${{ runner.os }}-
+
+      - name: '📦 Setup Node.js'
+        uses: actions/setup-node@v6.0.0
+        with:
+          # Due to https://github.com/actions/setup-node/issues/531 we need to enable corepack and yarn's cache manually
+          # cache: 'yarn'
+          node-version-file: .nvmrc
+
+      - name: '🔧 Enable Corepack'
+        id: corepack
+        run: |
+          corepack enable
+          echo "cache_dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+      # Because the above step cannot automatically enable corepack, we need to manually track yarn's cache
+      - name: '📩 Restore yarn cache'
+        id: yarn_cache
+        uses: actions/cache@v4.3.0
+        with:
+          path: ${{ steps.corepack.outputs.cache_dir }}
+          key: cache-yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            cache-yarn-${{ runner.os }}-
+
+      - name: '🥥 Setup Vercel'
+        run: |
+          npm install -g vercel
+
+      - name: '🧶 Install dependencies'
+        if: steps.node_modules_cache.outputs.cache-hit != 'true' || steps.yarn_cache.outputs.cache-hit != 'true'
+        run: |
+          yarn --immutable
+
+      - name: '🚀 Deploying'
+        id: deploy
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel pull \
+            --yes \
+            --environment=${{ inputs.context }} \
+            --token=${VERCEL_TOKEN}
+
+          sed -i "s/\"buildCommand\": null/\"buildCommand\": \"yarn build:${{ inputs.environment }}\"/" ./.vercel/project.json
+
+          NEXT_PUBLIC_ORIGIN="https://${{ inputs.alias }}" vercel build \
+            $(if [ "${{ inputs.context }}" == "production" ]; then printf -- "--prod"; fi)
+
+          url=$(vercel deploy \
+            --prebuilt \
+            $(if [ "${{ inputs.context }}" == "production" ]; then printf -- "--prod"; fi) \
+            --token=${VERCEL_TOKEN})
+
+          echo "deploy_link=${url}" >> $GITHUB_OUTPUT
+
+      - name: '🌐 Publish Deploy Preview Link'
+        env:
+          DEPLOY_LINK: ${{ steps.deploy.outputs.deploy_link }}
+        # NOTE: We don't fail the requests here because they may return 409 (conflict), meaning the
+        # alias we are assigning may already be assigned to the deployment.
+        run: |
+          id=$(curl --request GET \
+            --url "https://api.vercel.com/v13/deployments/${DEPLOY_LINK//https:\/\//}?teamId=${{ secrets.VERCEL_ORG_ID }}" \
+            --header 'Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}' | jq -r '.id')
+
+          curl --request POST \
+            --url "https://api.vercel.com/v2/deployments/${id}/aliases?teamId=${{ secrets.VERCEL_ORG_ID }}" \
+            --header 'Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}' \
+            --header 'Content-Type: application/json' \
+            --data '{
+              "alias": "${{ inputs.alias }}",
+              "redirect": null
+            }'
+
+          curl --request POST \
+            --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ inputs.sha }} \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            --header 'content-type: application/json' \
+            --data "{ \
+              \"context\": \"⚓ ${{ inputs.environment }} preview\",
+              \"description\": \"Ready!\",
+              \"state\": \"success\",
+              \"target_url\": \"https://${{ inputs.alias }}\"
+            }" \
+            --fail
+
+          echo "==[ DEPLOY LINK ]====================="
+          echo "https://${{ inputs.alias }}"
+          echo "======================================"

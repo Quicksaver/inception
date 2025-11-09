@@ -1,0 +1,23 @@
+@use 'scss/breakpoint' as *;
+
+:root {
+  --container-max-width: 1440px;
+  --container-padding-x: 16px;
+  --container-padding-y: 0;
+
+  @include breakpoint(mobile) {
+    --container-padding-x: 32px;
+  }
+
+  @include breakpoint(desktop) {
+    --container-padding-x: 36px;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-right: auto;
+  margin-left: auto;
+  padding: var(--container-padding-y) var(--container-padding-x);
+}

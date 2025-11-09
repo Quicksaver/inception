@@ -1,0 +1,71 @@
+@use 'scss/breakpoint' as *;
+
+.cookies-banner {
+  --container-padding-y: var(--container-padding-x);
+
+  position: fixed;
+  z-index: var(--z-cookies-banner);
+  bottom: 0;
+  left: 0;
+  transform: translateY(calc(100% + 1px));
+  overflow-y: auto;
+  display: flex;
+  width: calc(100% - (var(--container-padding-x) * 2));
+  max-width: 400px;
+  max-height: calc(100% - var(--container-padding-y));
+  margin-bottom: calc(var(--container-padding-y) / 2);
+  margin-left: var(--container-padding-x);
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+
+  &.cookies-banner--show {
+    transform: translateY(0);
+    transition: transform 0.5s ease-out;
+  }
+}
+
+.cookies-banner__page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cookies-banner__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cookies-banner__links {
+  a {
+    display: inline-block;
+    text-align: left;
+
+    &:not(:first-child) {
+      margin-left: 1em;
+    }
+  }
+}
+
+.cookies-banner__btn-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cookies-banner__btn--more {
+  order: 2;
+}
+
+.cookies-banner__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .form-checkbox__label {
+    font-size: var(--font-size-label-small);
+    line-height: 1.3;
+  }
+}

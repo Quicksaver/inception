@@ -1,0 +1,118 @@
+@use 'scss/breakpoint' as *;
+
+// for specificity
+.footer {
+  --container-max-width: 1440px;
+  --container-padding-y: 40px;
+  --footer-gap: 48px;
+
+  position: relative;
+  border-top: 2px solid var(--color-accent-gold);
+  background-color: var(--color-grey-50);
+
+  .container {
+    position: relative;
+    display: grid;
+    grid-template-areas: 'navigation subscribe' 'divider divider' 'copyright copyright';
+    grid-template-columns: minmax(0, 1fr) minmax(0, 600px);
+    gap: var(--footer-gap);
+
+    @include breakpoint(until-desktop) {
+      grid-template-areas: 'navigation' 'subscribe' 'divider' 'copyright';
+      grid-template-columns: 1fr;
+      justify-items: start;
+    }
+
+    @include breakpoint(until-mobile) {
+      justify-items: start;
+    }
+
+    .subscribe {
+      grid-area: subscribe;
+      max-width: 600px;
+    }
+  }
+}
+
+.footer__subscribe {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+
+  @include breakpoint(until-desktop) {
+    .footer__divider {
+      order: -1;
+    }
+  }
+}
+
+.footer__copyright {
+  display: flex;
+  grid-area: copyright;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-self: center;
+  font-size: var(--font-size-label-small);
+  color: var(--color-grey-700);
+
+  @include breakpoint(until-mobile) {
+    align-items: flex-start;
+  }
+}
+
+.footer__link-home {
+  display: inline-flex;
+  gap: 12px;
+  align-items: baseline;
+
+  &.link {
+    text-decoration: none;
+  }
+
+  .logo {
+    width: 130px;
+
+    @include breakpoint(until-mobile) {
+      width: 94px;
+    }
+  }
+
+  .tagline {
+    @include breakpoint(until-mobile) {
+      font-size: var(--font-size-body-small);
+    }
+  }
+}
+
+.footer__divider {
+  grid-area: divider;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-grey-200);
+}
+
+.footer__navigation {
+  display: flex;
+  grid-area: navigation;
+  flex-direction: column;
+  gap: 12px;
+  justify-self: start;
+
+  @include breakpoint(until-desktop) {
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+.footer__socials {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  color: var(--color-grey-700);
+
+  @include breakpoint(until-desktop) {
+    order: -2;
+  }
+}

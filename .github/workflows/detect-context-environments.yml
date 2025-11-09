@@ -1,0 +1,67 @@
+name: 'Detect Context Environments'
+
+on:
+  workflow_call:
+    outputs:
+      environment:
+        description: 'The environment used for this deploy'
+        value: ${{ jobs.detect_context.outputs.environment }}
+      ref_name:
+        description: 'The name of the branch or tag attached to this run'
+        value: ${{ jobs.detect_context.outputs.ref_name }}
+      sha:
+        description: 'The unique sha to attach the status to'
+        value: ${{ jobs.detect_context.outputs.sha }}
+
+permissions:
+  contents: read
+
+jobs:
+  detect_context:
+    name: '🎛 Detect Context'
+    runs-on: ubuntu-latest
+
+    outputs:
+      environment: ${{ steps.variables_prepare.outputs.environment }}
+      ref_name: ${{ steps.variables_prepare.outputs.ref_name }}
+      sha: ${{ steps.variables_prepare.outputs.sha }}
+
+    steps:
+      - name: '🛒 Checkout Project'
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: actions/checkout@v5.0.0
+
+      - name: '🎛 Environments Variables Prepare'
+        id: variables_prepare
+        run: |
+          REF_NAME="${{ github.ref_name }}"
+          SHA="${{ github.sha }}"
+
+          # Check the trigger for this Action
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Grab variables from Event Inputs
+            ENVIRONMENT="${{ github.event.inputs.environment }}"
+
+          else
+            if [ "${REF_NAME}" == "master" ]; then
+              ENVIRONMENT="production"
+            elif [ "${REF_NAME}" == "staging" ]; then
+              ENVIRONMENT="development"
+            else
+              echo "::error::Unsupported Ref : ${REF_NAME}"
+              exit 1
+            fi
+          fi
+
+          echo "==[ CONTEXT INFORMATION ]============="
+          echo "Event Name  : ${{ github.event_name }}"
+          echo "Environment : ${ENVIRONMENT}"
+          echo "Ref Name    : ${REF_NAME}"
+          echo "SHA         : ${SHA}"
+          echo "======================================"
+
+          echo "environment=${ENVIRONMENT}" >> $GITHUB_OUTPUT
+          echo "ref_name=${REF_NAME}" >> $GITHUB_OUTPUT
+          echo "sha=${SHA}" >> $GITHUB_OUTPUT
+
+          echo "Variables exported through GITHUB_OUTPUT"

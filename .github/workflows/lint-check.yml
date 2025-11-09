@@ -1,0 +1,103 @@
+name: 'Lint Check'
+
+on:
+  workflow_call:
+    inputs:
+      working_directory:
+        default: '.'
+        description: 'The working directory for the job'
+        type: string
+
+concurrency:
+  group: lint-check-${{ github.workflow }}-${{ inputs.working_directory }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  lint:
+    name: '🔬 Lint Check'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+
+    steps:
+      - name: '📩 Checkout Project'
+        uses: actions/checkout@v5.0.0
+
+      - name: '📩 Restore node_modules cache'
+        uses: actions/cache@v4.3.0
+        if: ${{ hashFiles(format('{0}/package.json', inputs.working_directory)) != '' }}
+        with:
+          path: node_modules
+          key: cache-env-development-node_modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            cache-env-development-node_modules-${{ runner.os }}-
+
+      - name: '📦 Setup Node.js'
+        uses: actions/setup-node@v6.0.0
+        if: ${{ hashFiles(format('{0}/package.json', inputs.working_directory)) != '' }}
+        with:
+          # Due to https://github.com/actions/setup-node/issues/531 we need to enable corepack and yarn's cache manually
+          # cache: 'yarn'
+          node-version-file: .nvmrc
+
+      - name: '🔧 Enable Corepack'
+        id: corepack
+        if: ${{ hashFiles(format('{0}/package.json', inputs.working_directory)) != '' }}
+        run: |
+          corepack enable
+          echo "cache_dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+      # Because the above step cannot automatically enable corepack, we need to manually track yarn's cache
+      - name: '📩 Restore yarn cache'
+        uses: actions/cache@v4.3.0
+        if: ${{ hashFiles(format('{0}/package.json', inputs.working_directory)) != '' }}
+        with:
+          path: ${{ steps.corepack.outputs.cache_dir }}
+          key: cache-env-development-yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            cache-env-development-yarn-${{ runner.os }}-
+
+      - name: '🧶 Install yarn dependencies'
+        run: |
+          NODE_ENV=development yarn --immutable
+
+      - name: '🧶 Setup PHP with tools'
+        uses: shivammathur/setup-php@v2
+        if: ${{ hashFiles(format('{0}/composer.json', inputs.working_directory)) != '' }}
+        with:
+          php-version: '8.4'
+          tools: composer
+
+      - name: '📩 Restore vendor cache'
+        uses: actions/cache@v4.3.0
+        if: ${{ hashFiles(format('{0}/composer.json', inputs.working_directory)) != '' }}
+        with:
+          path: ${{ steps.corepack.outputs.cache_dir }}
+          key: cache-vendor-${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            cache-vendor-${{ runner.os }}-
+
+      - name: '🧶 Install composer dependencies'
+        if: ${{ hashFiles(format('{0}/composer.json', inputs.working_directory)) != '' }}
+        run: |
+          composer install --no-interaction
+
+      - name: '🧬 Run Sanity typegen'
+        if: ${{ hashFiles(format('{0}/studio/typegen.json', inputs.working_directory)) != '' }}
+        run: |
+          yarn sanity:schema-extract && yarn sanity:typegen
+
+      - name: '🧬 Run Next.js typegen'
+        if: ${{ hashFiles(format('{0}/next.config.ts', inputs.working_directory)) != '' }}
+        run: |
+          yarn next typegen
+
+      - name: '🔬 Lint check'
+        run: |
+          yarn lint:check

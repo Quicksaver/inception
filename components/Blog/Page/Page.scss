@@ -1,0 +1,134 @@
+@use 'scss/breakpoint' as *;
+
+%blog-page-container-width {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.blog-page {
+  --container-padding-y: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-block: 48px;
+
+  .page-title {
+    @extend %blog-page-container-width;
+  }
+}
+
+.blog-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.blog-page__meta {
+  @extend %blog-page-container-width;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--font-size-label);
+  color: var(--color-grey-800);
+
+  @include breakpoint(tablet) {
+    font-size: var(--font-size-body);
+  }
+}
+
+.blog-page__abstract {
+  max-width: 900px;
+  margin: 0;
+  margin-inline: auto;
+  font-size: var(--font-size-body-large);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-grey-800);
+
+  @include breakpoint(tablet) {
+    font-size: var(--font-size-h4);
+  }
+}
+
+.blog-page__author {
+  font-weight: 600;
+}
+
+.blog-page__separator {
+  opacity: 0.5;
+}
+
+.blog-page__date {
+  color: var(--color-grey-700);
+}
+
+.blog-page__date--updated {
+  font-style: italic;
+}
+
+.blog-page__cover {
+  position: relative;
+  aspect-ratio: 21/9;
+  width: 100%;
+  max-height: 450px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.blog-page__body {
+  @extend %blog-page-container-width;
+
+  display: flex;
+  flex-direction: column;
+  gap: 85px;
+}
+
+.blog-page__navigation {
+  @extend %blog-page-container-width;
+
+  display: grid;
+  grid-template-areas: 'previous next';
+  gap: 30px;
+
+  @include breakpoint(until-mobile) {
+    grid-template-areas: 'previous' 'next';
+  }
+
+  .icon-chevron {
+    width: 12px;
+  }
+}
+
+.blog-page__previous {
+  grid-area: previous;
+  justify-self: start;
+
+  @include breakpoint(until-mobile) {
+    justify-self: center;
+  }
+
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
+.blog-page__next {
+  grid-area: next;
+  justify-self: end;
+
+  @include breakpoint(until-mobile) {
+    justify-self: center;
+  }
+
+  svg {
+    transform: rotate(-90deg);
+  }
+}

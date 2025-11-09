@@ -1,0 +1,203 @@
+@use 'scss/colors';
+
+.date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.date-picker__label {
+  font-size: var(--font-size-body-small);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-grey-800);
+}
+
+.date-picker__trigger {
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  height: 42px;
+  padding: 12px;
+  border: 1px solid var(--color-grey-200);
+  font-size: var(--font-size-body-small);
+  font-weight: 500;
+  color: var(--color-grey-700);
+  text-align: left;
+  background-color: var(--color-grey-50);
+
+  &:hover {
+    background-color: var(--color-grey-100);
+  }
+
+  &:focus {
+    border-color: var(--color-primary, var(--color-grey-800));
+    outline: none;
+  }
+}
+
+.date-picker__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey-700);
+}
+
+.date-picker__value {
+  flex: 1;
+}
+
+.date-picker__content {
+  z-index: var(--z-popover);
+  padding: 12px;
+  border: 1px solid var(--color-grey-200);
+  background-color: var(--color-white);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -2px rgb(0 0 0 / 5%);
+}
+
+.date-picker__calendar {
+  margin: 0;
+
+  .rdp {
+    margin: 0;
+  }
+
+  .rdp-months {
+    display: flex;
+    justify-content: center;
+  }
+
+  .rdp-month {
+    margin: 0;
+  }
+
+  .rdp-month_caption {
+    justify-content: center;
+  }
+
+  .rdp-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 12px;
+    font-size: var(--font-size-body-small);
+    font-weight: 500;
+  }
+
+  .rdp-caption_dropdowns {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rdp-dropdown {
+    cursor: pointer;
+    padding: 4px 8px;
+    border: 1px solid var(--color-grey-200);
+    font-size: var(--font-size-body-small);
+    background-color: var(--color-white);
+  }
+
+  .rdp-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .rdp-head_cell {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-grey-500);
+    text-align: center;
+  }
+
+  .rdp-cell {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+  }
+
+  .rdp-button {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: none;
+    font-size: 14px;
+    background-color: transparent;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--color-grey-100);
+    }
+  }
+
+  .rdp-day_selected {
+    color: var(--color-white);
+    background-color: var(--color-grey-800);
+
+    &:hover {
+      background-color: var(--color-grey-700);
+    }
+  }
+
+  .rdp-day_today {
+    font-weight: 600;
+    color: var(--color-grey-800);
+  }
+
+  .rdp-day_outside {
+    color: var(--color-grey-300);
+  }
+
+  .rdp-day_disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .rdp-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .rdp-nav_button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--color-grey-100);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .rdp-chevron {
+    width: 16px;
+    height: 16px;
+  }
+
+  .rdp-caption_label {
+    font-size: var(--font-size-body-small);
+  }
+}

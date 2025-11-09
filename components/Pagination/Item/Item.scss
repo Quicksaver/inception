@@ -1,0 +1,19 @@
+.pagination-item__link {
+  &:not(:hover) {
+    text-decoration: none;
+  }
+
+  svg {
+    width: 12px;
+  }
+}
+
+.pagination-item__link--active {
+  pointer-events: none;
+  cursor: default;
+  background-color: var(--color-accent-gold-light);
+}
+
+.pagination-item__link--break {
+  pointer-events: none;
+}

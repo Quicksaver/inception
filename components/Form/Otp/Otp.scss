@@ -1,0 +1,11 @@
+@use 'scss/breakpoint' as *;
+
+.form-otp {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  @include breakpoint(until-small) {
+    gap: 4px;
+  }
+}

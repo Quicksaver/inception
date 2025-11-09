@@ -1,0 +1,13 @@
+@use 'scss/breakpoint' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h4 {
+    @include breakpoint(until-portrait) {
+      font-size: var(--font-size-h6);
+    }
+  }
+}

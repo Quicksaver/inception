@@ -1,0 +1,6 @@
+@use 'sass:math';
+
+@function alpha($color, $alpha) {
+  $a: if(math.is-unitless($alpha), $alpha * 100%, $alpha);
+  @return color(from $color srgb r g b / $a);
+}

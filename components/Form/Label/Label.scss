@@ -1,0 +1,16 @@
+.form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+  width: 100%;
+  line-height: 1.4;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
+.form-label__label {
+  .form-label--errored & {
+    color: var(--color-error);
+  }
+}

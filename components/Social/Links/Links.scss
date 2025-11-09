@@ -1,0 +1,14 @@
+.social-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  .link {
+    --link-color: var(--color-grey-700);
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}

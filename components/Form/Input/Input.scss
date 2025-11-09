@@ -1,0 +1,18 @@
+.form-input__input {
+  padding: 16px;
+  border: 1px solid var(--color-grey-400);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+
+  &::placeholder {
+    color: var(--color-grey-600);
+  }
+
+  .form-input--errored & {
+    border-color: var(--color-error);
+  }
+}
+
+textarea.form-input__input {
+  height: 8em;
+}
