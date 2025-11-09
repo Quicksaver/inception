@@ -43,10 +43,8 @@ jobs:
             ENVIRONMENT="${{ github.event.inputs.environment }}"
 
           else
-            if [ "${REF_NAME}" == "master" ]; then
+            if [ "${REF_NAME}" == "main" ]; then
               ENVIRONMENT="production"
-            elif [ "${REF_NAME}" == "staging" ]; then
-              ENVIRONMENT="development"
             else
               echo "::error::Unsupported Ref : ${REF_NAME}"
               exit 1

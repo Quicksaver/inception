@@ -48,7 +48,7 @@ jobs:
           script: |
             // For now we always deploy production previews, remove this section to control via
             // labels
-            return 'production';
+            return JSON.stringify(['production']);
 
             // Manual dispatches always run
             if (context.eventName === 'workflow_dispatch') {

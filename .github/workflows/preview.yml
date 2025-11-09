@@ -25,9 +25,12 @@ jobs:
   lint_check:
     uses: ./.github/workflows/lint-check.yml
 
-  deploy_production:
+  deploy_preview:
+    strategy:
+      matrix:
+        environment: ${{ fromJson(needs.detect_context.outputs.enabled_builds) }}
+
     uses: ./.github/workflows/deploy-on-vercel.yml
-    if: ${{ contains(needs.detect_context.outputs.enabled_builds, 'production') }}
 
     needs:
       - detect_context
@@ -39,30 +42,9 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     with:
-      alias: ${{ needs.detect_context.outputs.prefix }}-production--inception.vercel.app
+      alias: ${{ needs.detect_context.outputs.prefix }}--${{ matrix.environment }}--zinc-inception.vercel.app
       context: preview
-      environment: production
-      name: '🚧 Deploy'
-      prefix: ${{ needs.detect_context.outputs.prefix }}
-      sha: ${{ needs.detect_context.outputs.sha }}
-
-  deploy_staging:
-    uses: ./.github/workflows/deploy-on-vercel.yml
-    if: ${{ contains(needs.detect_context.outputs.enabled_builds, 'staging') }}
-
-    needs:
-      - detect_context
-      - lint_check
-
-    secrets:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-    with:
-      alias: ${{ needs.detect_context.outputs.prefix }}-staging--inception.vercel.app
-      context: preview
-      environment: development
+      environment: ${{ matrix.environment }}
       name: '🚧 Deploy'
       prefix: ${{ needs.detect_context.outputs.prefix }}
       sha: ${{ needs.detect_context.outputs.sha }}
