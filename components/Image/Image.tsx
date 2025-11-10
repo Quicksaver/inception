@@ -54,7 +54,26 @@ export default function Image({
   width,
   ...props
 }: ImageProps) {
-  const realSrc = (src && ((src as StaticImageData).src || (src as ImageSrcSanity).asset?.url || src as string)) || '';
+  const realSrc = useMemo(() => {
+    if (src) {
+      if (typeof src === 'string') {
+        return src;
+      }
+
+      const staticDataSrc = (src as StaticImageData).src;
+      if (staticDataSrc) {
+        return staticDataSrc;
+      }
+
+      const sanitySrc = (src as ImageSrcSanity).asset?.url;
+      if (sanitySrc) {
+        return sanitySrc;
+      }
+    }
+
+    return '';
+  }, [ src ]);
+
   const { width: windowWidth } = useWindowSize();
   const rendered = useRendered();
 
