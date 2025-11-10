@@ -2,7 +2,6 @@ import Container from 'components/Container';
 import FooterNavigation from 'components/Footer/Navigation';
 import Link from 'components/Link';
 import Logo from 'components/Logo';
-import SocialLinks from 'components/Social/Links/Links';
 
 import { getSiteSettings } from 'utils/siteSettings';
 
@@ -14,13 +13,6 @@ export default async function Footer() {
   return (
     <footer className="footer">
       <Container>
-        <div className="footer__subscribe">
-          <div className="footer__socials">
-            Follow us:
-            <SocialLinks />
-          </div>
-        </div>
-
         <div className="footer__navigation">
           <Link
             className="footer__link-home"

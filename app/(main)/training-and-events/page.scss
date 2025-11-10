@@ -1,29 +1,5 @@
 @use 'scss/breakpoint' as *;
 
-.training-events-page {
-  @include breakpoint(until-tablet) {
-    h1 {
-      margin-bottom: var(--sp-6);
-    }
-
-    h2 {
-      margin-bottom: var(--sp-6);
-    }
-  }
-
-  h1 {
-    margin-bottom: var(--sp-8);
-  }
-
-  h2 {
-    margin-bottom: var(--sp-8);
-  }
-
-  h3 {
-    margin-bottom: var(--sp-4);
-  }
-}
-
 .training-events-page__section {
   padding-top: var(--sp-16);
   padding-bottom: var(--sp-16);

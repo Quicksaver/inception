@@ -1,28 +1,6 @@
 @use 'scss/breakpoint' as *;
 @use 'scss/spacing' as *;
 
-.consortium-page {
-  h1 {
-    margin-bottom: var(--sp-8);
-
-    @include breakpoint(until-tablet) {
-      margin-bottom: var(--sp-6);
-    }
-  }
-
-  h2 {
-    margin-bottom: var(--sp-8);
-
-    @include breakpoint(until-tablet) {
-      margin-bottom: var(--sp-6);
-    }
-  }
-
-  h3 {
-    margin-bottom: var(--sp-4);
-  }
-}
-
 .consortium-page__section {
   padding-top: var(--sp-16);
   padding-bottom: var(--sp-16);
@@ -86,7 +64,10 @@
 }
 
 .consortium-page__beneficiary-content {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  gap: var(--sp-5);
 }
 
 .consortium-page__partners-list {

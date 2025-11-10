@@ -1,5 +1,5 @@
 .sanity-body {
-  --sanity-body-gap: 20px;
+  --sanity-body-gap: var(--sp-5);
 
   display: flex;
   flex-direction: column;

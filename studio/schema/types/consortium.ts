@@ -7,7 +7,7 @@ export const consortiumType = defineType({
   fields: [
     title(),
     defineField({
-      name: 'description',
+      name: 'content',
       type: 'body',
     }),
   ],

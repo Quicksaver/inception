@@ -9,6 +9,14 @@ export const beneficiariesType = defineType({
   fields: [
     title(),
     defineField({
+      name: 'subtitle',
+      type: 'string',
+    }),
+    defineField({
+      name: 'link',
+      type: 'url',
+    }),
+    defineField({
       name: 'images',
       of: [
         image({
@@ -22,7 +30,7 @@ export const beneficiariesType = defineType({
       ],
     }),
     defineField({
-      name: 'description',
+      name: 'content',
       type: 'body',
     }),
     orderRankField({ type: 'beneficiaries' }),

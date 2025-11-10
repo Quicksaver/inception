@@ -22,13 +22,6 @@ export default function getDefaultStructure(S: StructureBuilder, context: Config
           .schemaType('about')
           .documentId('about'),
       ),
-    S.documentTypeListItem('scientificWorkPackages').title('Scientific Work Packages'),
-    orderableDocumentListDeskItem({
-      context,
-      S,
-      title: '-- order --',
-      type: 'scientificWorkPackages',
-    }),
     // @ts-expect-error this is correct, types must need fixing
     S.divider(),
     S.listItem()
@@ -83,6 +76,15 @@ export default function getDefaultStructure(S: StructureBuilder, context: Config
       S,
       title: '-- order --',
       type: 'positions',
+    }),
+    // @ts-expect-error this is correct, types must need fixing
+    S.divider(),
+    S.documentTypeListItem('scientificWorkPackages').title('Scientific Work Packages'),
+    orderableDocumentListDeskItem({
+      context,
+      S,
+      title: '-- order --',
+      type: 'scientificWorkPackages',
     }),
     // @ts-expect-error this is correct, types must need fixing
     S.divider(),

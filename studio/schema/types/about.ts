@@ -7,8 +7,24 @@ export const aboutType = defineType({
   fields: [
     title(),
     defineField({
-      name: 'content',
-      type: 'pageBody',
+      description: 'Each section represents a block on the homepage.',
+      name: 'sections',
+      of: [
+        {
+          fields: [
+            title({
+              description: 'Section title will not appear on the page, it is just for easy reference',
+              name: 'name',
+            }),
+            defineField({
+              name: 'content',
+              type: 'body',
+            }),
+          ],
+          type: 'object',
+        },
+      ],
+      type: 'array',
     }),
   ],
   icon: DocumentTextIcon,

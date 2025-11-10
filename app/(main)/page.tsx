@@ -4,6 +4,8 @@ import SanityBody from 'components/Sanity/Body';
 
 import { fetchAbout } from 'studio/queries/about';
 
+import './page.scss';
+
 export default async function MainPage() {
   const about = await fetchAbout();
 
@@ -18,12 +20,18 @@ export default async function MainPage() {
   }
 
   return (
-    <Main>
+    <Main className="homepage">
       <Container>
-        <h1>{ about.title }</h1>
-        <SanityBody>
-          { about.content }
-        </SanityBody>
+        { about.sections?.map(section => (
+          <div
+            className="homepage__section"
+            key={ section._key }
+          >
+            <SanityBody>
+              { section.content }
+            </SanityBody>
+          </div>
+        )) }
       </Container>
     </Main>
   );
