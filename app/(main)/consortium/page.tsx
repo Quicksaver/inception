@@ -1,5 +1,6 @@
 import Container from 'components/Container';
 import Image from 'components/Image';
+import Link from 'components/Link';
 import Main from 'components/Main';
 import SanityBody from 'components/Sanity/Body';
 
@@ -20,7 +21,7 @@ export default async function ConsortiumPage() {
         <Container className="consortium-page__section">
           <h1>{ consortium.title }</h1>
           <SanityBody>
-            { consortium.description }
+            { consortium.content }
           </SanityBody>
         </Container>
       ) }
@@ -51,9 +52,12 @@ export default async function ConsortiumPage() {
                   </div>
                 ) }
                 <div className="consortium-page__beneficiary-content">
-                  <h3>{ item.title }</h3>
+                  <Link href={ item.link || '' }>
+                    <h3>{ item.title }</h3>
+                  </Link>
+                  <h4>{ item.subtitle }</h4>
                   <SanityBody>
-                    { item.description }
+                    { item.content }
                   </SanityBody>
                 </div>
               </div>
@@ -70,16 +74,18 @@ export default async function ConsortiumPage() {
           <h2>Associated Partners</h2>
           <div className="consortium-page__partners-list">
             { partners.map((partner, idx) => (
-              <div
+              <Link
                 className="consortium-page__partner"
+                href={ partner.link || '' }
                 // eslint-disable-next-line react/no-array-index-key
                 key={ idx }
+                title={ partner.title || 'Partner link' }
               >
                 <Image
                   alt={ partner.title || 'Partner logo' }
                   src={ partner.image }
                 />
-              </div>
+              </Link>
             )) }
           </div>
         </Container>

@@ -1,4 +1,5 @@
 import Container from 'components/Container';
+import IconUser from 'components/Icon/User';
 import Image from 'components/Image';
 import Main from 'components/Main';
 import SanityBody from 'components/Sanity/Body';
@@ -24,6 +25,10 @@ export default async function DCPositionsPage() {
             key={ position._id }
           >
             <div className="dc-positions-page__position-image">
+              <div className="dc-positions-page__position-image-placeholder">
+                <IconUser />
+              </div>
+
               <Image
                 alt={ position.name || 'Position holder' }
                 src={ position.image }
@@ -50,13 +55,13 @@ export default async function DCPositionsPage() {
                   { position.coSupervisor }
                 </div>
               </div>
-
-              { position.description && (
-                <SanityBody className="dc-positions-page__position-description">
-                  { position.description }
-                </SanityBody>
-              ) }
             </div>
+
+            { position.description && (
+              <SanityBody className="dc-positions-page__position-description">
+                { position.description }
+              </SanityBody>
+            ) }
           </Container>
         );
       }) }

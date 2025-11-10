@@ -38,7 +38,7 @@ export default async function TrainingAndEventsPage() {
               >
                 <h3>{ event.title }</h3>
                 { event.subtitle && (
-                  <p className="training-events-page__event-subtitle">{ event.subtitle }</p>
+                  <h4 className="training-events-page__event-subtitle">{ event.subtitle }</h4>
                 ) }
                 <SanityBody>
                   { event.description }
@@ -63,7 +63,7 @@ export default async function TrainingAndEventsPage() {
               >
                 <h3>{ event.title }</h3>
                 { event.subtitle && (
-                  <p className="training-events-page__event-subtitle">{ event.subtitle }</p>
+                  <h4 className="training-events-page__event-subtitle">{ event.subtitle }</h4>
                 ) }
                 <SanityBody>
                   { event.description }

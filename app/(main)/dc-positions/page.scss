@@ -4,7 +4,7 @@
   padding-top: var(--sp-12);
   padding-bottom: var(--sp-8);
 
-  @include breakpoint(until-tablet) {
+  @include breakpoint(until-portrait) {
     padding-top: var(--sp-8);
     padding-bottom: var(--sp-6);
   }
@@ -16,44 +16,59 @@
 
 .dc-positions-page__position {
   display: grid;
-  grid-template-areas: 'image content';
+  grid-template-areas: 'image content' 'description description';
   grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   gap: var(--sp-8);
   padding-top: var(--sp-12);
   padding-bottom: var(--sp-12);
   border-top: 1px solid var(--border-color);
 
-  @include breakpoint(until-tablet) {
-    grid-template-columns: 1fr;
+  @include breakpoint(until-portrait) {
+    grid-template-areas: 'image' 'content' 'description';
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--sp-6);
     padding-top: var(--sp-8);
     padding-bottom: var(--sp-8);
   }
 
   &:nth-child(even) {
-    grid-template-areas: 'content image';
+    grid-template-areas: 'content image' 'description description';
     grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
 
-    @include breakpoint(until-tablet) {
-      grid-template-columns: 1fr;
+    @include breakpoint(until-portrait) {
+      grid-template-areas: 'image' 'content' 'description';
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 }
 
 .dc-positions-page__position-image {
+  position: relative;
   grid-area: image;
+  aspect-ratio: 1 / 1;
 
   img {
-    aspect-ratio: 1 / 1;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     border: 1px solid var(--border-color);
     object-fit: cover;
 
-    @include breakpoint(until-tablet) {
+    @include breakpoint(until-portrait) {
       aspect-ratio: 4 / 3;
     }
   }
+}
+
+.dc-positions-page__position-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--color-grey-500);
 }
 
 .dc-positions-page__position-content {
@@ -62,15 +77,15 @@
   flex-direction: column;
   gap: var(--sp-6);
 
-  @include breakpoint(until-tablet) {
+  @include breakpoint(until-portrait) {
     gap: var(--sp-4);
   }
 }
 
 .dc-positions-page__position-header {
-  h2 {
-    margin: 0 0 var(--sp-2) 0;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
 }
 
 .dc-positions-page__position-name {
@@ -83,22 +98,23 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
+  align-self: start;
   padding: var(--sp-4);
   border: 1px solid var(--border-color);
   background-color: var(--color-grey-50);
 
-  @include breakpoint(until-tablet) {
+  @include breakpoint(until-portrait) {
     gap: var(--sp-3);
     padding: var(--sp-3);
   }
 }
 
 .dc-positions-page__position-meta-item {
-  strong {
-    margin-right: var(--sp-2);
-  }
+  display: flex;
+  gap: var(--sp-2);
+  align-items: baseline;
 }
 
 .dc-positions-page__position-description {
-  margin-top: var(--sp-4);
+  grid-area: description;
 }
