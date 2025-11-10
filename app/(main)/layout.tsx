@@ -22,7 +22,7 @@ const robotoMono = RobotoMono({
 
 export async function generateMetadata(): Promise<Metadata> {
   const {
-    description, shareimage, tagline, title,
+    description, shareimage, title,
   } = await getSiteSettings();
 
   return {
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       }
       : undefined,
     title: {
-      default: `${title} - ${tagline}`,
+      default: title,
       template: `%s | ${title}`,
     },
   };
