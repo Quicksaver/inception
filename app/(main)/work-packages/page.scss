@@ -1,0 +1,58 @@
+@use 'scss/breakpoint' as *;
+
+.work-packages-page {
+  h1 {
+    margin-bottom: var(--sp-8);
+
+    @include breakpoint(until-tablet) {
+      margin-bottom: var(--sp-6);
+    }
+  }
+
+  h2 {
+    margin-bottom: var(--sp-4);
+  }
+}
+
+.work-packages-page__intro {
+  padding-top: var(--sp-12);
+  padding-bottom: var(--sp-8);
+
+  @include breakpoint(until-tablet) {
+    padding-top: var(--sp-8);
+    padding-bottom: var(--sp-6);
+  }
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.work-packages-page__section {
+  padding-top: var(--sp-8);
+  padding-bottom: var(--sp-16);
+
+  @include breakpoint(until-tablet) {
+    padding-top: var(--sp-6);
+    padding-bottom: var(--sp-12);
+  }
+}
+
+.work-packages-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+
+  @include breakpoint(until-tablet) {
+    gap: var(--sp-8);
+  }
+}
+
+.work-packages-page__item {
+  padding: var(--sp-6);
+  border: 1px solid var(--border-color);
+
+  @include breakpoint(until-tablet) {
+    padding: var(--sp-4);
+  }
+}

@@ -7,7 +7,6 @@ import Subscript from '../../components/Subscript';
 import Superscript from '../../components/Superscript';
 
 type BodyParams = Partial<Omit<ArrayDefinition, 'of' | 'type'>> & {
-  h1?: boolean;
   name: string;
   of?: ArrayDefinition['of'];
 };

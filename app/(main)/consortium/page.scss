@@ -1,0 +1,116 @@
+@use 'scss/breakpoint' as *;
+@use 'scss/spacing' as *;
+
+.consortium-page {
+  h1 {
+    margin-bottom: var(--sp-8);
+
+    @include breakpoint(until-tablet) {
+      margin-bottom: var(--sp-6);
+    }
+  }
+
+  h2 {
+    margin-bottom: var(--sp-8);
+
+    @include breakpoint(until-tablet) {
+      margin-bottom: var(--sp-6);
+    }
+  }
+
+  h3 {
+    margin-bottom: var(--sp-4);
+  }
+}
+
+.consortium-page__section {
+  padding-top: var(--sp-16);
+  padding-bottom: var(--sp-16);
+
+  @include breakpoint(until-tablet) {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-12);
+
+    &:first-child {
+      padding-top: var(--sp-8);
+    }
+  }
+
+  &:first-child {
+    padding-top: var(--sp-12);
+  }
+}
+
+.consortium-page__beneficiaries-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+
+  @include breakpoint(until-tablet) {
+    gap: var(--sp-8);
+  }
+}
+
+.consortium-page__beneficiary {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--sp-6);
+  padding: var(--sp-6);
+  border: 1px solid var(--border-color);
+
+  @include breakpoint(until-tablet) {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+    padding: var(--sp-4);
+  }
+}
+
+.consortium-page__beneficiary-images {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+
+  @include breakpoint(until-tablet) {
+    flex-flow: row wrap;
+
+    img {
+      width: calc(50% - var(--sp-2));
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.consortium-page__beneficiary-content {
+  flex: 1;
+}
+
+.consortium-page__partners-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sp-6);
+
+  @include breakpoint(until-tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--sp-4);
+  }
+}
+
+.consortium-page__partner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  border: 1px solid var(--border-color);
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+  }
+}

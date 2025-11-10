@@ -63,6 +63,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
+    "@sanity/orderable-document-list": "^1.4.0",
     "@sanity/vision": "^4.14.1",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/js-cookie": "^3.0.6",

@@ -1,0 +1,18 @@
+import { UsersIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity';
+
+import title from '../fields/title';
+
+export const consortiumType = defineType({
+  fields: [
+    title(),
+    defineField({
+      name: 'description',
+      type: 'body',
+    }),
+  ],
+  icon: UsersIcon,
+  name: 'consortium',
+  title: 'Consortium',
+  type: 'document',
+});

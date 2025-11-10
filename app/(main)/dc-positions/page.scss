@@ -1,0 +1,104 @@
+@use 'scss/breakpoint' as *;
+
+.dc-positions-page__intro {
+  padding-top: var(--sp-12);
+  padding-bottom: var(--sp-8);
+
+  @include breakpoint(until-tablet) {
+    padding-top: var(--sp-8);
+    padding-bottom: var(--sp-6);
+  }
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.dc-positions-page__position {
+  display: grid;
+  grid-template-areas: 'image content';
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: var(--sp-8);
+  padding-top: var(--sp-12);
+  padding-bottom: var(--sp-12);
+  border-top: 1px solid var(--border-color);
+
+  @include breakpoint(until-tablet) {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+    padding-top: var(--sp-8);
+    padding-bottom: var(--sp-8);
+  }
+
+  &:nth-child(even) {
+    grid-template-areas: 'content image';
+    grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+
+    @include breakpoint(until-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.dc-positions-page__position-image {
+  grid-area: image;
+
+  img {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    object-fit: cover;
+
+    @include breakpoint(until-tablet) {
+      aspect-ratio: 4 / 3;
+    }
+  }
+}
+
+.dc-positions-page__position-content {
+  display: flex;
+  grid-area: content;
+  flex-direction: column;
+  gap: var(--sp-6);
+
+  @include breakpoint(until-tablet) {
+    gap: var(--sp-4);
+  }
+}
+
+.dc-positions-page__position-header {
+  h2 {
+    margin: 0 0 var(--sp-2) 0;
+  }
+}
+
+.dc-positions-page__position-name {
+  margin: 0;
+  font-size: var(--font-size-body-large);
+  color: var(--color-grey-700);
+}
+
+.dc-positions-page__position-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  border: 1px solid var(--border-color);
+  background-color: var(--color-grey-50);
+
+  @include breakpoint(until-tablet) {
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+  }
+}
+
+.dc-positions-page__position-meta-item {
+  strong {
+    margin-right: var(--sp-2);
+  }
+}
+
+.dc-positions-page__position-description {
+  margin-top: var(--sp-4);
+}
