@@ -1,0 +1,57 @@
+name: Detect Node.js Package Manager
+description: Detects the Node.js package manager used in the project
+
+outputs:
+  cache_command:
+    description: The command to get the cache directory for the package manager
+    value: ${{ steps.package_manager.outputs.cache_command }}
+  install_command:
+    description: The command to install dependencies with the detected package manager
+    value: ${{ steps.package_manager.outputs.install_command }}
+  lock_files:
+    description: The glob for the lock files
+    value: ${{ steps.package_manager.outputs.lock_files || '' }}
+  package_manager:
+    description: The detected package manager
+    value: ${{ steps.package_manager.outputs.package_manager || 'unknown' }}
+  run_binary:
+    description: The command to run the package manager binary
+    value: ${{ steps.package_manager.outputs.package_manager }}
+  run_script:
+    description: The command to run scripts with the detected package manager
+    value: ${{ steps.package_manager.outputs.run_script }}
+
+runs:
+  using: composite
+
+  steps:
+    - name: Detect Package Manager
+      id: package_manager
+      shell: bash
+      # Hard-coded as the root of the repository, this script is expected to be used within a monorepo setup
+      working-directory: .
+      run: |
+        if [ -f "yarn.lock" ]; then
+          echo "package_manager=yarn" >> $GITHUB_OUTPUT
+          echo "cache_command=yarn config get cacheFolder" >> $GITHUB_OUTPUT
+          echo "install_command=yarn --immutable" >> $GITHUB_OUTPUT
+          echo "lock_files=**/yarn.lock" >> $GITHUB_OUTPUT
+          echo "run_binary=yarn" >> $GITHUB_OUTPUT
+          echo "run_script=yarn" >> $GITHUB_OUTPUT
+
+        elif [ -f "pnpm-lock.yaml" ]; then
+          echo "package_manager=pnpm" >> $GITHUB_OUTPUT
+          echo "cache_command=pnpm store path" >> $GITHUB_OUTPUT
+          echo "install_command=pnpm install --frozen-lockfile" >> $GITHUB_OUTPUT
+          echo "lock_files=**/pnpm-lock.yaml" >> $GITHUB_OUTPUT
+          echo "run_binary=pnpm" >> $GITHUB_OUTPUT
+          echo "run_script=pnpm" >> $GITHUB_OUTPUT
+
+        elif [ -f "package-lock.json" ]; then
+          echo "package_manager=npm" >> $GITHUB_OUTPUT
+          echo "cache_command=npm config get cache" >> $GITHUB_OUTPUT
+          echo "install_command=npm ci" >> $GITHUB_OUTPUT
+          echo "lock_files=**/package-lock.json" >> $GITHUB_OUTPUT
+          echo "run_binary=npx" >> $GITHUB_OUTPUT
+          echo "run_script=npm run" >> $GITHUB_OUTPUT
+        fi
