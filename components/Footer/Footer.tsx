@@ -1,8 +1,9 @@
+import OrnamentText from 'components/Ornament/Text';
+
 import Container from 'components/Container';
 import FooterNavigation from 'components/Footer/Navigation';
 import Link from 'components/Link';
 import Logo from 'components/Logo';
-import OrnamentText2 from 'components/Ornament/Text2';
 
 import { getSiteSettings } from 'utils/siteSettings';
 
@@ -25,7 +26,7 @@ export default async function Footer() {
         </div>
 
         <FooterNavigation />
-        <OrnamentText2 />
+        <OrnamentText />
 
         <div className="footer__copyright">
           { footerMessage }

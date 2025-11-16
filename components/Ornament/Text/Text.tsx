@@ -1,7 +1,7 @@
-export default function OrnamentText2() {
+export default function OrnamentText() {
   return (
     <svg
-      className="ornament-text-2"
+      className="ornament-text"
       fill="none"
       viewBox="0 0 150 4"
       xmlns="http://www.w3.org/2000/svg"
