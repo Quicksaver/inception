@@ -3,7 +3,6 @@
   --link-color-hover: var(--color-grey-600);
 
   color: var(--link-color);
-  transition: var(--animation-colors-fade);
 
   &:hover {
     color: var(--link-color-hover);
