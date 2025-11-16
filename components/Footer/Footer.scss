@@ -2,29 +2,31 @@
 
 // for specificity
 .footer {
-  --container-max-width: 1440px;
-  --container-padding-y: 40px;
-  --footer-gap: 48px;
+  --container-padding-y: var(--sp-10);
 
   position: relative;
-  border-top: 2px solid var(--color-accent-gold);
-  background-color: var(--color-grey-50);
+  border-top: var(--sp-1) solid var(--color-brand-primary);
+  background-image: radial-gradient(circle at center, var(--color-grey-100), var(--color-white));
 
   .container {
     position: relative;
     display: grid;
-    grid-template-areas: 'navigation' 'divider' 'copyright';
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--footer-gap);
+    grid-template-areas: 'brand navigation' 'divider divider' 'copyright copyright';
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    gap: var(--sp-10) var(--sp-14);
+    justify-items: start;
 
-    @include breakpoint(until-desktop) {
-      grid-template-areas: 'navigation' 'divider' 'copyright';
-      justify-items: start;
+    @include breakpoint(until-portrait) {
+      grid-template-areas: 'brand' 'navigation' 'divider' 'copyright';
+      grid-template-columns: minmax(0, 1fr);
     }
+  }
 
-    @include breakpoint(until-mobile) {
-      justify-items: start;
-    }
+  .ornament-text-2 {
+    grid-area: divider;
+    justify-self: center;
+    width: calc(var(--spacing) * 38);
+    color: var(--color-brand-secondary-light);
   }
 }
 
@@ -32,11 +34,10 @@
   display: flex;
   grid-area: copyright;
   flex-direction: column;
-  gap: 8px;
   align-items: center;
   justify-self: center;
-  font-size: var(--font-size-label-small);
-  color: var(--color-grey-700);
+  font-size: var(--font-size-label);
+  color: var(--color-brand-secondary-light);
 
   @include breakpoint(until-mobile) {
     align-items: flex-start;
@@ -45,7 +46,7 @@
 
 .footer__link-home {
   display: inline-flex;
-  gap: 12px;
+  gap: var(--sp-3);
   align-items: baseline;
 
   &.link {
@@ -53,11 +54,7 @@
   }
 
   .logo {
-    width: 130px;
-
-    @include breakpoint(until-mobile) {
-      width: 94px;
-    }
+    height: var(--sp-7);
   }
 
   .tagline {
@@ -67,18 +64,11 @@
   }
 }
 
-.footer__divider {
-  grid-area: divider;
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-grey-200);
-}
-
-.footer__navigation {
+.footer__brand {
   display: flex;
-  grid-area: navigation;
+  grid-area: brand;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--sp-6);
   justify-self: start;
 
   @include breakpoint(until-desktop) {

@@ -2,6 +2,7 @@ import Container from 'components/Container';
 import FooterNavigation from 'components/Footer/Navigation';
 import Link from 'components/Link';
 import Logo from 'components/Logo';
+import OrnamentText2 from 'components/Ornament/Text2';
 
 import { getSiteSettings } from 'utils/siteSettings';
 
@@ -13,7 +14,7 @@ export default async function Footer() {
   return (
     <footer className="footer">
       <Container>
-        <div className="footer__navigation">
+        <div className="footer__brand">
           <Link
             className="footer__link-home"
             href="/"
@@ -21,13 +22,10 @@ export default async function Footer() {
           >
             <Logo />
           </Link>
-
-          <div className="footer__divider" />
-
-          <FooterNavigation />
         </div>
 
-        <div className="footer__divider" />
+        <FooterNavigation />
+        <OrnamentText2 />
 
         <div className="footer__copyright">
           { footerMessage }

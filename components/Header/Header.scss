@@ -3,8 +3,8 @@
 
 // for specificity
 .header.container {
-  --container-max-width: 1920px;
-  --container-padding-y: 16px;
+  --container-max-width: calc(var(--spacing) * 480); // 1920px
+  --container-padding-y: var(--sp-4);
 
   position: sticky;
   z-index: var(--z-header);
@@ -13,7 +13,7 @@
   display: grid;
   grid-template-areas: 'logo . navigation';
   grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
-  gap: 32px;
+  gap: var(--sp-8);
   align-items: center;
   width: 100%;
 
@@ -26,8 +26,6 @@
   }
 
   @include breakpoint(until-landscape) {
-    --container-padding-y: 16px;
-
     grid-template-areas: 'logo . hamburger';
     padding-inline: 0;
   }
@@ -56,7 +54,7 @@
 
   &::after {
     opacity: 0;
-    filter: drop-shadow(0 4px 24px rgb(0 0 0 / 8%));
+    filter: drop-shadow(0 var(--sp-1) var(--sp-6) rgb(0 0 0 / 8%));
     transition: all var(--animation-simple-fade);
   }
 
@@ -79,7 +77,7 @@
   display: flex;
   grid-area: logo;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sp-1);
   align-items: flex-start;
 
   @include breakpoint(until-landscape) {
@@ -91,6 +89,7 @@
   }
 
   .logo {
-    height: 40px;
+    height: var(--sp-10);
+    color: inherit;
   }
 }

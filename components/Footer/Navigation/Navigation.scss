@@ -1,17 +1,26 @@
+@use 'scss/alpha' as *;
 @use 'scss/breakpoint' as *;
 
 .footer-navigation {
   display: flex;
-  gap: 48px;
+  grid-area: navigation;
+  gap: var(--sp-12);
   justify-content: flex-start;
+  padding-left: var(--sp-14);
+  border-left: 1px solid alpha(var(--color-brand-secondary-light), 0.2);
 
   @include breakpoint(until-desktop) {
     flex-wrap: wrap;
     justify-content: center;
   }
 
+  @include breakpoint(until-portrait) {
+    padding-left: 0;
+    border-left: none;
+  }
+
   @include breakpoint(until-mobile) {
-    gap: 32px;
+    gap: var(--sp-8);
     justify-content: flex-start;
   }
 
@@ -29,20 +38,26 @@
 .footer-navigation__block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 150px;
+  gap: var(--sp-2);
+  min-width: calc(var(--spacing) * 38);
 
   menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-
-    .link {
-      text-decoration: none;
-    }
+    gap: var(--sp-2);
   }
 }
 
 .footer-navigation__block-label {
   display: none;
+}
+
+.footer-navigation__link {
+  &.link {
+    color: var(--color-brand-secondary-light);
+
+    &:hover {
+      color: var(--link-color-hover);
+    }
+  }
 }
