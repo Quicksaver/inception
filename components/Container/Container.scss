@@ -1,7 +1,7 @@
 @use 'scss/breakpoint' as *;
 
 :root {
-  --container-max-width: calc(var(--spacing) * 360); // 1440px
+  --container-max-width: calc((var(--spacing) * 324)); // 1224px + padding
   --container-padding-x: var(--sp-4);
   --container-padding-y: 0;
 
