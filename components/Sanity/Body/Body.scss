@@ -12,9 +12,6 @@
   h3,
   h4 {
     margin-top: calc(var(--sanity-body-gap) * 1.2);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: 0.02em;
   }
 
   h1 {
@@ -39,7 +36,7 @@
   }
 
   strong {
-    font-weight: 600;
+    font-weight: var(--font-weight-medium);
     color: var(--color-brand-light);
   }
 
@@ -51,7 +48,6 @@
     padding: 0.1em;
     border: 1px solid var(--color-brand-light);
     border-radius: 0.1em;
-    line-height: 1.4375;
     color: var(--color-brand-secondary);
   }
 
@@ -143,7 +139,7 @@
 
     cite {
       font-size: 0.9em;
-      font-weight: 600;
+      font-weight: var(--font-weight-medium);
       color: var(--color-grey-800);
     }
   }

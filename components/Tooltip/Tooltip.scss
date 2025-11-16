@@ -5,8 +5,7 @@
   max-width: 200px;
   padding: 8px 12px;
   font-size: var(--font-size-label-small);
-  font-weight: 400;
-  line-height: 1.4;
+  line-height: var(--line-height-small);
   color: var(--color-white);
   background-color: var(--color-grey-950);
   box-shadow: 0 4px 12px alpha(var(--color-grey-950), 20%);

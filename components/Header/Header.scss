@@ -25,10 +25,6 @@
     }
   }
 
-  @include breakpoint(landscape) {
-    min-height: 90px;
-  }
-
   @include breakpoint(until-landscape) {
     --container-padding-y: 16px;
 
@@ -95,19 +91,6 @@
   }
 
   .logo {
-    width: 212px;
-
-    @include breakpoint(until-portrait) {
-      width: 144px;
-    }
-  }
-
-  .tagline {
-    font-size: var(--font-size-body-large);
-    line-height: 1;
-
-    @include breakpoint(until-portrait) {
-      font-size: var(--font-size-label-small);
-    }
+    height: 40px;
   }
 }
