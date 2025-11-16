@@ -18,6 +18,7 @@
   width: 100%;
 
   @include breakpoint(portrait) {
+    body.header--always-scrolled &,
     &.header--scrolled {
       &::after {
         opacity: 1;
@@ -31,6 +32,7 @@
   }
 
   @include breakpoint(until-portrait) {
+    body:not(.mobile-disable-header-scrolled).header--always-scrolled &,
     body:not(.mobile-disable-header-scrolled) &.header--scrolled {
       &::after {
         opacity: 1;
