@@ -34,7 +34,7 @@
   grid-template-columns: 200px 1fr;
   gap: var(--sp-6);
   padding: var(--sp-6);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
 
   @include breakpoint(until-tablet) {
     grid-template-columns: 1fr;
@@ -86,7 +86,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--sp-4);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
 
   img {
     width: 100%;

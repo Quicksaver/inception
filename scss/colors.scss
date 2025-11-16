@@ -1,7 +1,6 @@
 :root {
   --color-brand-primary: #1100fe;
   --color-brand-secondary: #00cbfe;
-  --color-brand-secondary-light: #5067b9;
   --color-brand-tertiary: #c7f3fe;
 
   // Grey colors
@@ -20,15 +19,16 @@
   // UI colors
   --color-black: var(--color-grey-950);
   --color-white: #fff;
+  --color-text-light: #5067b9;
   --color-success: var(--color-grey-500);
   --color-warning: var(--color-grey-800);
   --color-error: #c63c3c;
-  --background-color: var(--color-white);
-  --text-color: var(--color-black);
-  --border-color: var(--text-color);
+  --color-background: var(--color-white);
+  --color-text: var(--color-black);
+  --color-border: var(--color-text);
 }
 
 body {
-  color: var(--text-color);
-  background-color: var(--background-color);
+  color: var(--color-text);
+  background-color: var(--color-background);
 }

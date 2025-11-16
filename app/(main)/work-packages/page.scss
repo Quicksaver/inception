@@ -50,7 +50,7 @@
 
 .work-packages-page__item {
   padding: var(--sp-6);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
 
   @include breakpoint(until-tablet) {
     padding: var(--sp-4);

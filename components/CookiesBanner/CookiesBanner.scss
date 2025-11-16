@@ -15,8 +15,8 @@
   max-height: calc(100% - var(--container-padding-y));
   margin-bottom: calc(var(--container-padding-y) / 2);
   margin-left: var(--container-padding-x);
-  border: 1px solid var(--border-color);
-  background-color: var(--background-color);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
 
   &.cookies-banner--show {
     transform: translateY(0);

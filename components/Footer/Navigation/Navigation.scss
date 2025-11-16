@@ -7,7 +7,7 @@
   gap: var(--sp-12);
   justify-content: flex-start;
   padding-left: var(--sp-14);
-  border-left: 1px solid alpha(var(--color-brand-secondary-light), 0.2);
+  border-left: 1px solid alpha(var(--color-text-light), 0.2);
 
   @include breakpoint(until-desktop) {
     flex-wrap: wrap;
@@ -54,7 +54,7 @@
 
 .footer-navigation__link {
   &.link {
-    color: var(--color-brand-secondary-light);
+    color: var(--color-text-light);
 
     &:hover {
       color: var(--link-color-hover);

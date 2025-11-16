@@ -26,7 +26,7 @@
     grid-area: divider;
     justify-self: center;
     width: calc(var(--spacing) * 38);
-    color: var(--color-brand-secondary-light);
+    color: var(--color-text-light);
   }
 }
 
@@ -37,7 +37,7 @@
   align-items: center;
   justify-self: center;
   font-size: var(--font-size-label);
-  color: var(--color-brand-secondary-light);
+  color: var(--color-text-light);
 
   @include breakpoint(until-mobile) {
     align-items: flex-start;

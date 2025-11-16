@@ -17,7 +17,7 @@
   --font-size-label: 14px;
   --font-size-label-small: 12px;
   --font-size-note: 10px;
-  --font-weight-normal: 400;
+  --font-weight-regular: 400;
   --font-weight-medium: 500;
   --line-height-normal: 1.4;
   --line-height-small: 1.2;
@@ -36,7 +36,7 @@
 body {
   font-family: var(--font-main);
   font-size: var(--font-size-body);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-normal);
   letter-spacing: 0;
 }
@@ -47,7 +47,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
 }
 
 h1 {
