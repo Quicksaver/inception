@@ -1,0 +1,74 @@
+name: Node.js Dependencies
+description: Installs Node.js dependencies
+
+inputs:
+  global_cache_key:
+    description: The cache key to use for restoring caches
+  include_dev_dependencies:
+    default: 'false'
+    description: Whether we are in development mode
+  local_cache_key:
+    description: The cache key to use for restoring caches
+  sha:
+    description: The unique sha to attach the status to
+  working_directory:
+    default: .
+    description: The working directory for the job
+
+runs:
+  using: composite
+
+  steps:
+    - name: 📦 Detect Package Manager
+      id: package_manager
+      uses: ./.github/actions/detect-nodejs-package-manager
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v6.0.0
+      with:
+        # Due to https://github.com/actions/setup-node/issues/531 we need to enable corepack and track the global
+        # cache manually
+        # cache: '${{ steps.package_manager.outputs.package_manager }}'
+        node-version-file: .nvmrc
+        package-manager-cache: false
+
+    - name: 🔧 Enable Corepack
+      id: corepack
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      run: |
+        corepack enable
+        echo "cache_dir=$(${{ steps.package_manager.outputs.cache_command }})" >> $GITHUB_OUTPUT
+        echo "npm_prefix=$(npm config get prefix)" >> $GITHUB_OUTPUT
+        echo "npm_version=$(npm --version)" >> $GITHUB_OUTPUT
+        echo "package_manager_version=$(${{ steps.package_manager.outputs.package_manager }} --version)" >> $GITHUB_OUTPUT
+
+    # Because the above step cannot automatically enable corepack, we need to manually track the global cache
+    - name: 📩 Restore node_modules
+      if: ${{ inputs.local_cache_key }}
+      uses: actions/cache@v4.3.0
+      with:
+        path: |
+          ${{ steps.corepack.outputs.cache_dir }}
+          **/node_modules
+        key: cache-node_modules-${{ runner.os }}-${{ steps.corepack.outputs.package_manager_version }}-${{ inputs.local_cache_key }}-${{ hashFiles(steps.package_manager.outputs.lock_files) }}
+        restore-keys: |
+          cache-node_modules-${{ runner.os }}-${{ steps.corepack.outputs.package_manager_version }}-${{ inputs.local_cache_key }}-
+
+    - name: 📩 Restore global cache
+      if: ${{ inputs.global_cache_key }}
+      uses: actions/cache@v4.3.0
+      with:
+        path: |
+          ${{ steps.corepack.outputs.npm_prefix }}/bin
+          ${{ steps.corepack.outputs.npm_prefix }}/lib
+        key: cache-global_npm-${{ runner.os }}-${{ steps.corepack.outputs.npm_version }}-${{ inputs.global_cache_key }}-${{ inputs.sha }}
+        restore-keys: |
+          cache-global_npm-${{ runner.os }}-${{ steps.corepack.outputs.npm_version }}-${{ inputs.global_cache_key }}-
+
+    - name: 📥 Install dependencies
+      if: ${{ steps.package_manager.outputs.install_command }}
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      run: |
+        ${{ inputs.include_dev_dependencies == 'true' && 'NODE_ENV=development ' || ''}}${{ steps.package_manager.outputs.install_command }}

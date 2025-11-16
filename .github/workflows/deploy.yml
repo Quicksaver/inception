@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: Deploy
 
 on:
   push:
@@ -8,9 +8,9 @@ on:
     inputs:
       environment:
         type: environment
-        description: 'One of `production`'
+        description: One of `production`
         required: true
-        default: 'production'
+        default: production
 
 permissions:
   contents: read
@@ -18,12 +18,15 @@ permissions:
 
 jobs:
   detect_context:
+    name: 🎛
     uses: ./.github/workflows/detect-context-environments.yml
 
   lint_check:
+    name: 🔬
     uses: ./.github/workflows/lint-check.yml
 
   deploy_vercel:
+    name: 🚀
     uses: ./.github/workflows/deploy-on-vercel.yml
 
     needs:
@@ -36,15 +39,16 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     with:
-      alias: ${{ needs.detect_context.outputs.environment == 'production' && 'zinc-inception.vercel.app' || '' }}
+      alias: ${{ needs.detect_context.outputs.environment == 'production' && 'msca-inception.com' || '' }}
       context: ${{ needs.detect_context.outputs.environment == 'production' && 'production' || 'preview' }}
       environment: ${{ needs.detect_context.outputs.environment }}
-      name: '🚀 Deploy to Vercel'
+      name: Deploy to Vercel
       prefix: environment
       sha: ${{ needs.detect_context.outputs.sha }}
 
   # @TODO separate datasets for staging and production
   deploy_sanity:
+    name: 🚀
     uses: ./.github/workflows/deploy-on-sanity.yml
 
     needs:
@@ -56,4 +60,6 @@ jobs:
 
     with:
       environment: ${{ needs.detect_context.outputs.environment }}
-      name: '🚀 Deploy to Sanity'
+      name: Deploy to Sanity
+      prefix: environment
+      sha: ${{ needs.detect_context.outputs.sha }}

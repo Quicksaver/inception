@@ -1,4 +1,4 @@
-name: 'Preview'
+name: Preview
 
 on:
   pull_request:
@@ -9,10 +9,14 @@ on:
       - synchronize
   workflow_dispatch:
     inputs:
+      environments:
+        description: One of `production`
+        required: false
+        type: environment
       prefix:
-        description: 'The prefix identifier for this job; i.e. `pr-123`'
+        default: pr-
+        description: The prefix identifier for this job; i.e. `pr-123`
         required: true
-        default: 'pr-'
 
 permissions:
   contents: read
@@ -20,16 +24,24 @@ permissions:
 
 jobs:
   detect_context:
+    name: 🎛
     uses: ./.github/workflows/detect-context-previews.yml
+    with:
+      # Not controlled via labels, always deploy the provided environments
+      environments: ${{ inputs.environments || 'production' }}
 
   lint_check:
+    name: 🔬
     uses: ./.github/workflows/lint-check.yml
 
   deploy_preview:
+    if: ${{ needs.detect_context.outputs.environments != '[]' }}
+
     strategy:
       matrix:
-        environment: ${{ fromJson(needs.detect_context.outputs.enabled_builds) }}
+        environment: ${{ fromJson(needs.detect_context.outputs.environments) }}
 
+    name: 🚧 ${{ matrix.environment }}
     uses: ./.github/workflows/deploy-on-vercel.yml
 
     needs:
@@ -45,6 +57,6 @@ jobs:
       alias: ${{ needs.detect_context.outputs.prefix }}--${{ matrix.environment }}--zinc-inception.vercel.app
       context: preview
       environment: ${{ matrix.environment }}
-      name: '🚧 Deploy'
+      name: Deploy
       prefix: ${{ needs.detect_context.outputs.prefix }}
       sha: ${{ needs.detect_context.outputs.sha }}

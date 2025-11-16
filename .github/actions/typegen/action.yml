@@ -1,0 +1,29 @@
+name: Typegen
+description: Generates type definitions for Sanity and Next.js
+
+inputs:
+  working_directory:
+    default: .
+    description: The working directory for the job
+
+runs:
+  using: composite
+
+  steps:
+    - name: 📦 Detect Package Manager
+      id: package_manager
+      uses: ./.github/actions/detect-nodejs-package-manager
+
+    - name: 🧬 Sanity typegen
+      if: ${{ hashFiles(format('{0}/studio/typegen.json', inputs.working_directory)) != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      run: |
+        ${{ steps.package_manager.outputs.run_script }} sanity:schema-extract && ${{ steps.package_manager.outputs.run_script }} sanity:typegen
+
+    - name: 🧬 Next.js typegen
+      if: ${{ hashFiles(format('{0}/next.config.ts', inputs.working_directory)) != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      run: |
+        ${{ steps.package_manager.outputs.run_binary }} next typegen

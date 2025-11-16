@@ -1,14 +1,22 @@
-name: 'Deploy on Sanity'
+name: Deploy on Sanity
 
 on:
   workflow_call:
     inputs:
       environment:
-        description: 'The environment we are deploying'
+        description: The environment we are deploying
         required: true
         type: string
       name:
-        description: 'The name to use for the workflow step'
+        description: The name to use for the workflow step
+        required: true
+        type: string
+      prefix:
+        description: The prefix for this workflow run
+        required: true
+        type: string
+      sha:
+        description: The unique sha to attach the status to
         required: true
         type: string
     secrets:
@@ -29,51 +37,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: '🛒 Checkout Project'
+      - name: 🛒 Checkout Project
         uses: actions/checkout@v5.0.0
 
-      - name: '📩 Restore node_modules cache'
-        id: node_modules_cache
-        uses: actions/cache@v4.3.0
+      - name: 📦 Node.js Dependencies
+        uses: ./.github/actions/nodejs-dependencies
         with:
-          path: node_modules
-          key: cache-node_modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            cache-node_modules-${{ runner.os }}-
+          global_cache_key: ${{ inputs.environment }}-${{ inputs.prefix }}-sanity
+          local_cache_key: ${{ inputs.environment }}-${{ inputs.prefix }}
+          sha: ${{ inputs.sha }}
 
-      - name: '📦 Setup Node.js'
-        uses: actions/setup-node@v6.0.0
-        with:
-          # Due to https://github.com/actions/setup-node/issues/531 we need to enable corepack and yarn's cache manually
-          # cache: 'yarn'
-          node-version-file: .nvmrc
-
-      - name: '🔧 Enable Corepack'
-        id: corepack
-        run: |
-          corepack enable
-          echo "cache_dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-
-      # Because the above step cannot automatically enable corepack, we need to manually track yarn's cache
-      - name: '📩 Restore yarn cache'
-        id: yarn_cache
-        uses: actions/cache@v4.3.0
-        with:
-          path: ${{ steps.corepack.outputs.cache_dir }}
-          key: cache-yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            cache-yarn-${{ runner.os }}-
-
-      - name: '🥥 Setup Sanity'
+      - name: 🥥 Setup Sanity
         run: |
           npm install -g @sanity/cli
 
-      - name: '🧶 Install dependencies'
-        if: steps.node_modules_cache.outputs.cache-hit != 'true' || steps.yarn_cache.outputs.cache-hit != 'true'
-        run: |
-          yarn --immutable
-
-      - name: '🚀 Deploying'
+      # @TODO separate datasets
+      - name: 🚀 Deploy
         id: deploy
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}

@@ -1,24 +1,29 @@
-name: 'Detect Context Previews'
+name: Detect Context Previews
 
 on:
   workflow_call:
-    # inputs:
-    #   app:
-    #     description: 'The app we are deploying'
-    #     required: true
-    #     type: string
+    inputs:
+      app:
+        description: The app we are deploying. Set only if this is monorepo with multiple apps.
+        required: false
+        type: string
+      environments:
+        default: ''
+        description: Comma separated list of which preview environment builds should be triggered. If empty, will auto-detect based on PR labels.
+        required: false
+        type: string
     outputs:
-      enabled_builds:
-        description: 'Which preview builds should be triggered'
-        value: ${{ jobs.detect_context.outputs.enabled_builds }}
+      environments:
+        description: Which preview builds should be triggered
+        value: ${{ jobs.detect_context.outputs.environments }}
       prefix:
-        description: 'Prefix for the preview alias'
+        description: Prefix for the preview alias
         value: ${{ jobs.detect_context.outputs.prefix }}
       ref_name:
-        description: 'The name of the branch or tag attached to this run'
+        description: The name of the branch or tag attached to this run
         value: ${{ jobs.detect_context.outputs.ref_name }}
       sha:
-        description: 'The unique sha to attach the status to'
+        description: The unique sha to attach the status to
         value: ${{ jobs.detect_context.outputs.sha }}
 
 permissions:
@@ -26,105 +31,72 @@ permissions:
 
 jobs:
   detect_context:
-    name: '🎛 Detect Context'
+    name: Detect Context
     runs-on: ubuntu-latest
 
     outputs:
-      enabled_builds: ${{ steps.check_labels.outputs.result }}
+      environments: ${{ steps.check_labels.outputs.result }}
       prefix: ${{ steps.variables_prepare.outputs.prefix }}
       ref_name: ${{ steps.variables_prepare.outputs.ref_name }}
       sha: ${{ steps.variables_prepare.outputs.sha }}
 
     steps:
-      - name: '🛒 Checkout Project'
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+      - name: 🛒 Checkout Project
         uses: actions/checkout@v5.0.0
 
-      - name: ✅ Check Labels
+      - name: 📦 Detect Package Manager
+        id: package_manager
+        uses: ./.github/actions/detect-nodejs-package-manager
+
+      - name: 🏷️ Check Labels
         uses: actions/github-script@v8.0.0
         id: check_labels
         with:
           result-encoding: string
           script: |
-            // For now we always deploy production previews, remove this section to control via
-            // labels
-            return JSON.stringify(['production']);
-
-            // Manual dispatches always run
-            if (context.eventName === 'workflow_dispatch') {
-              return 'production,staging';
+            if ('${{ inputs.environments }}') {
+              return JSON.stringify(
+                '${{ inputs.environments }}'
+                  .split(',')
+                  .map(s => s.trim())
+                  .filter(Boolean),
+              );
             }
 
             const labels = context.payload.pull_request.labels.map(label => label.name);
-            const hasApp = labels.includes('app-${{ inputs.app }}');
-            const hasProduction = labels.includes('environment-production');
-            const hasStaging = labels.includes('environment-staging');
+            const hasApp = !'${{ inputs.app }}' || labels.includes('run-app-${{ inputs.app }}');
+            const environments = labels
+              .filter(label => label.startsWith('run-env-'))
+              .map(label => label.substring(8));
 
             if (context.payload.action === 'labeled') {
-              // No matter what labels we add, if the PR already has `ready`, we don't need to
-              // trigger the builds as they have already run before when it was added.
-              if (context.payload.label.name !== 'ready' && labels.includes('ready')) {
-                return '';
-              }
-
-              if (context.payload.label.name === 'ready') {
-                // When adding the `ready` label, we can skip any individual app builds that have
-                // already run for this app.
-                if (hasApp) {
-                  return [
-                    !hasProduction ? 'production' : '',
-                    !hasStaging ? 'staging' : '',
-                  ]
-                    .filter(Boolean)
-                    .join(',');
-                }
-
-                // Otherwise we assume we have no previous builds for this app, so run them all.
-                return 'production,staging';
-              }
-
               // If adding an environment label, we need to check if the app label is also present
               // in order to run the corresponding build.
-              if (context.payload.label.name.startsWith('environment-') && hasApp) {
-                return context.payload.label.name.substring(12);
+              if (context.payload.label.name.startsWith('run-env-') && hasApp) {
+                return JSON.stringify([ context.payload.label.name.substring(8) ]);
               }
 
               // If adding an app label, we need to check if the environment labels are also
               // present, same as above.
-              if (context.payload.label.name === 'app-${{ inputs.app }}') {
-                return [
-                  hasProduction ? 'production' : '',
-                  hasStaging ? 'staging' : '',
-                ]
-                  .filter(Boolean)
-                  .join(',');
+              if ('${{ inputs.app }}' && context.payload.label.name === 'run-app-${{ inputs.app }}') {
+                return JSON.stringify(environments);
               }
 
               // Any other label added, don't run anything.
-              return '';
+              return '[]';
             }
 
             // From here on out, it's PR opened, reopened, or synchronize events.
 
-            // If PR has `ready`, we can run both production and staging builds.
-            if (labels.includes('ready')) {
-              return 'production,staging';
-            }
-
             // If PR has the app label, we can run the corresponding environment builds.
-            if (labels.includes('app-${{ inputs.app }}')) {
-              return [
-                  hasProduction ? 'production' : '',
-                  hasStaging ? 'staging' : '',
-                ]
-                  .filter(Boolean)
-                  .join(',');
+            if (hasApp) {
+              return JSON.stringify(environments);
             }
 
             // No labels found that would trigger any build for this PR.
-            return '';
+            return '[]';
 
-      - name: '🎛 Environments Variables Prepare'
+      - name: 🎛 Environments Variables Prepare
         id: variables_prepare
         run: |
           # Check the trigger for this Action
@@ -141,14 +113,14 @@ jobs:
           fi
 
           echo "==[ CONTEXT INFORMATION ]============="
-          echo "Event Name : ${{ github.event_name }}"
-          echo "Prefix     : ${PREFIX}"
-          echo "Ref Name   : ${REF_NAME}"
-          echo "SHA        : ${SHA}"
+          echo "Environments    : ${{ steps.check_labels.outputs.result }}"
+          echo "Event Name      : ${{ github.event_name }}"
+          echo "Package Manager : ${{ steps.package_manager.outputs.package_manager || 'unknown' }}"
+          echo "Prefix          : ${PREFIX}"
+          echo "Ref Name        : ${REF_NAME}"
+          echo "SHA             : ${SHA}"
           echo "======================================"
 
           echo "prefix=${PREFIX}" >> $GITHUB_OUTPUT
           echo "ref_name=${REF_NAME}" >> $GITHUB_OUTPUT
           echo "sha=${SHA}" >> $GITHUB_OUTPUT
-
-          echo "Variables exported through GITHUB_OUTPUT"
