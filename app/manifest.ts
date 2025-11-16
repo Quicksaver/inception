@@ -2,11 +2,11 @@ import { Manifest } from 'next/dist/lib/metadata/types/manifest-types';
 
 export default function manifest(): Manifest {
   return {
-    background_color: '#1a1a1a',
+    background_color: '#ffffff',
     display: 'standalone',
-    name: 'JetShared',
-    short_name: 'JetShared',
+    name: 'Inception',
+    short_name: 'Inception',
     start_url: '/',
-    theme_color: '#1a1a1a',
+    theme_color: '#ffffff',
   };
 }
