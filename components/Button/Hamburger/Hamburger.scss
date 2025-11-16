@@ -7,6 +7,7 @@
   align-items: center;
   align-self: stretch;
   justify-content: center;
+  width: calc(20px + (var(--container-padding-x) * 2));
   padding: 0;
   padding-inline: var(--container-padding-x);
   border: 0;

@@ -1,8 +1,9 @@
 .link {
   --link-color: var(--text-color);
-  --link-color-hover: var(--color-grey-600);
+  --link-color-hover: var(--color-brand-primary);
 
   color: var(--link-color);
+  text-decoration: none;
 
   &:hover {
     color: var(--link-color-hover);
