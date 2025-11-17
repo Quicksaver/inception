@@ -115,7 +115,7 @@ export default async function MainPage() {
         <Container className="homepage__section homepage__section--last">
           <div className="homepage__section-logo">
             <OrnamentEllipsis />
-            <Logo />
+            <Logo themeColor />
           </div>
 
           <SanityBody>
