@@ -75,6 +75,6 @@ export function blogUrlBuilder(params: Partial<BlogParameters> = blogParameters)
   ].filter(Boolean);
 
   return parameters.length
-    ? `/blog/${parameters.join('/')}`
-    : '/blog';
+    ? `/news/${parameters.join('/')}`
+    : '/news';
 }

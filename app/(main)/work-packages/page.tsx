@@ -1,5 +1,6 @@
 import Container from 'components/Container';
 import Main from 'components/Main';
+import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
 import { fetchScientificWorkPackages } from 'studio/queries/scientificWorkPackages';
@@ -12,7 +13,7 @@ export default async function WorkPackagesPage() {
   return (
     <Main className="work-packages-page">
       <Container className="work-packages-page__intro">
-        <h1>Scientific Work Packages</h1>
+        <PageTitle>Scientific Work Packages</PageTitle>
       </Container>
 
       { workPackages.length > 0
@@ -27,7 +28,7 @@ export default async function WorkPackagesPage() {
                   className="work-packages-page__item"
                   key={ workPackage.title }
                 >
-                  <h2>{ workPackage.title }</h2>
+                  <h4>{ workPackage.title }</h4>
                   <SanityBody>
                     { workPackage.description }
                   </SanityBody>

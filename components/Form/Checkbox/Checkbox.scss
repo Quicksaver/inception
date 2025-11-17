@@ -18,7 +18,7 @@
   box-sizing: border-box;
   width: var(--form-checkbox-check-size);
   height: var(--form-checkbox-check-size);
-  border: 1px solid alpha(var(--border-color), 40%);
+  border: 1px solid alpha(var(--color-border), 40%);
   transition: all var(--animation-simple-fade);
 
   // Icon inside the indicator
@@ -32,7 +32,7 @@
     width: 100%;
     height: 100%;
     padding: calc(var(--form-checkbox-check-size) / 6);
-    color: var(--text-color);
+    color: var(--color-text);
     opacity: 0;
     transition: all var(--animation-simple-fade);
   }
@@ -54,7 +54,7 @@
     width: calc(var(--form-checkbox-check-size) * 0.5);
     height: 2px;
     border-radius: 2px;
-    background: var(--text-color);
+    background: var(--color-text);
     transition: all var(--animation-simple-fade);
   }
 
@@ -68,9 +68,7 @@
   cursor: pointer;
   user-select: none;
   position: relative;
-  line-height: 1.4;
-  color: var(--text-color);
+  color: var(--color-text);
   text-align: left;
-  letter-spacing: 0.02em;
   transition: all var(--animation-simple-fade);
 }

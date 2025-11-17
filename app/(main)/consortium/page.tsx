@@ -2,6 +2,7 @@ import Container from 'components/Container';
 import Image from 'components/Image';
 import Link from 'components/Link';
 import Main from 'components/Main';
+import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
 import { fetchAssociatedPartners } from 'studio/queries/associatedPartners';
@@ -9,6 +10,30 @@ import { fetchBeneficiaries } from 'studio/queries/beneficiaries';
 import { fetchConsortium } from 'studio/queries/consortium';
 
 import './page.scss';
+
+const beneficiaryImageSizes = [
+  {
+    condition: 'until-tablet' as const,
+    size: '50vw' as const,
+  },
+  { size: '200px' as const },
+];
+
+const partnerImageSizes = [
+  {
+    condition: 'max-width: 663px' as const,
+    size: '100vw' as const,
+  },
+  {
+    condition: 'max-width: 975px' as const,
+    size: '50vw' as const,
+  },
+  {
+    condition: 'until-maxcontainer' as const,
+    size: '33.3vw' as const,
+  },
+  { size: '192px' as const },
+];
 
 export default async function ConsortiumPage() {
   const consortium = await fetchConsortium();
@@ -19,10 +44,12 @@ export default async function ConsortiumPage() {
     <Main className="consortium-page">
       { consortium && (
         <Container className="consortium-page__section">
-          <h1>{ consortium.title }</h1>
-          <SanityBody>
-            { consortium.content }
-          </SanityBody>
+          <PageTitle>{ consortium.title }</PageTitle>
+          { !!consortium.content && (
+            <SanityBody>
+              { consortium.content }
+            </SanityBody>
+          ) }
         </Container>
       ) }
 
@@ -31,21 +58,21 @@ export default async function ConsortiumPage() {
           as="section"
           className="consortium-page__section consortium-page__beneficiaries"
         >
-          <h2>Beneficiaries</h2>
+          <h4>Beneficiaries</h4>
           <div className="consortium-page__beneficiaries-list">
-            { }
             { beneficiaries.map(item => (
-              <div
+              <article
                 className="consortium-page__beneficiary"
                 key={ item.title }
               >
                 { item.images.length > 0 && (
                   <div className="consortium-page__beneficiary-images">
-                    { item.images.map((image, idx) => (
+                    { item.images.map(image => (
                       <Image
                         alt={ item.title || 'Beneficiary image' }
-                        // eslint-disable-next-line react/no-array-index-key
-                        key={ idx }
+
+                        key={ image.asset?._id }
+                        sizes={ beneficiaryImageSizes }
                         src={ image }
                       />
                     )) }
@@ -53,14 +80,14 @@ export default async function ConsortiumPage() {
                 ) }
                 <div className="consortium-page__beneficiary-content">
                   <Link href={ item.link || '' }>
-                    <h3>{ item.title }</h3>
+                    <h4>{ item.title }</h4>
                   </Link>
-                  <h4>{ item.subtitle }</h4>
+                  <h6>{ item.subtitle }</h6>
                   <SanityBody>
                     { item.content }
                   </SanityBody>
                 </div>
-              </div>
+              </article>
             )) }
           </div>
         </Container>
@@ -71,7 +98,7 @@ export default async function ConsortiumPage() {
           as="section"
           className="consortium-page__section consortium-page__partners"
         >
-          <h2>Associated Partners</h2>
+          <h4>Associated Partners</h4>
           <div className="consortium-page__partners-list">
             { partners.map((partner, idx) => (
               <Link
@@ -83,6 +110,7 @@ export default async function ConsortiumPage() {
               >
                 <Image
                   alt={ partner.title || 'Partner logo' }
+                  sizes={ partnerImageSizes }
                   src={ partner.image }
                 />
               </Link>

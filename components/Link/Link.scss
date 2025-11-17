@@ -1,9 +1,9 @@
 .link {
-  --link-color: var(--text-color);
-  --link-color-hover: var(--color-grey-600);
+  --link-color: var(--color-text);
+  --link-color-hover: var(--color-brand-primary);
 
   color: var(--link-color);
-  transition: var(--animation-colors-fade);
+  text-decoration: none;
 
   &:hover {
     color: var(--link-color-hover);

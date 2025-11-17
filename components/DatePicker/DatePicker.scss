@@ -9,8 +9,7 @@
 
 .date-picker__label {
   font-size: var(--font-size-body-small);
-  font-weight: 600;
-  line-height: 1.2;
+  line-height: var(--line-height-small);
   color: var(--color-grey-800);
 }
 
@@ -24,7 +23,7 @@
   padding: 12px;
   border: 1px solid var(--color-grey-200);
   font-size: var(--font-size-body-small);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--color-grey-700);
   text-align: left;
   background-color: var(--color-grey-50);
@@ -86,7 +85,7 @@
     justify-content: center;
     padding: 0 0 12px;
     font-size: var(--font-size-body-small);
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
   }
 
   .rdp-caption_dropdowns {
@@ -112,8 +111,8 @@
   .rdp-head_cell {
     width: 32px;
     height: 32px;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-medium);
     color: var(--color-grey-500);
     text-align: center;
   }
@@ -130,7 +129,7 @@
     width: 32px;
     height: 32px;
     border: none;
-    font-size: 14px;
+    font-size: var(--font-size-label);
     background-color: transparent;
     transition: background-color 0.2s;
 
@@ -149,7 +148,7 @@
   }
 
   .rdp-day_today {
-    font-weight: 600;
+    font-weight: var(--font-weight-medium);
     color: var(--color-grey-800);
   }
 

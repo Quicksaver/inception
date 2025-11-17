@@ -16,8 +16,8 @@ export const queryBlogArticleBySlug = defineQuery(`
       ...coverImage,
       "asset": coverImage.asset->
     },
-    "nextSlug": *[_type == 'blogArticle' && publishTime > ^.publishTime] | order(publishTime asc)[0].slug.current,
-    "previousSlug": *[_type == 'blogArticle' && publishTime < ^.publishTime] | order(publishTime desc)[0].slug.current,
+    "nextSlug": *[_type == 'blogArticle' && published == true && publishTime > ^.publishTime] | order(publishTime asc)[0].slug.current,
+    "previousSlug": *[_type == 'blogArticle' && published == true && publishTime < ^.publishTime] | order(publishTime desc)[0].slug.current,
     publishTime,
     slug,
     title

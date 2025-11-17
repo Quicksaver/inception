@@ -24,6 +24,17 @@ export default function Header() {
   useEffect(
     () => {
       close();
+
+      if ([ '/' ].includes(pathname)) {
+        document.body.classList.add('header--always-scrolled');
+      }
+      else {
+        document.body.classList.remove('header--always-scrolled');
+      }
+
+      return () => {
+        document.body.classList.remove('header--always-scrolled');
+      };
     },
     [ close, pathname ],
   );

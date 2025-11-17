@@ -88,7 +88,9 @@ export default function getDefaultStructure(S: StructureBuilder, context: Config
     }),
     // @ts-expect-error this is correct, types must need fixing
     S.divider(),
-    S.documentTypeListItem('blogArticle').title('Blog'),
+    S.documentTypeListItem('blogArticle').title('News / Blog'),
+    // @ts-expect-error this is correct, types must need fixing
+    S.divider(),
     S.documentTypeListItem('page').title('Simple Pages'),
     S.listItem()
       .title('Site Settings')

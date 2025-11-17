@@ -1,6 +1,14 @@
 :root {
   --animation-simple-fade: 0.15s ease;
-  --animation-colors-fade:
-    background var(--animation-simple-fade), color var(--animation-simple-fade), fill var(--animation-simple-fade),
-    stroke var(--animation-simple-fade);
+
+  *,
+  *::before,
+  *::after {
+    transition:
+      background var(--animation-simple-fade),
+      color var(--animation-simple-fade),
+      fill var(--animation-simple-fade),
+      stroke var(--animation-simple-fade),
+      border-color var(--animation-simple-fade);
+  }
 }

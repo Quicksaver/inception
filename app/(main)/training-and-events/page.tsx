@@ -1,5 +1,6 @@
 import Container from 'components/Container';
 import Main from 'components/Main';
+import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
 import { fetchOtherEvents } from 'studio/queries/otherEvents';
@@ -16,8 +17,8 @@ export default async function TrainingAndEventsPage() {
   return (
     <Main className="training-events-page">
       { training && (
-        <Container className="training-events-page__section">
-          <h1>{ training.title }</h1>
+        <Container className="training-events-page__intro">
+          <PageTitle>{ training.title }</PageTitle>
           <SanityBody>
             { training.description }
           </SanityBody>
@@ -29,17 +30,19 @@ export default async function TrainingAndEventsPage() {
           as="section"
           className="training-events-page__section training-events-page__events"
         >
-          <h2>Training Events</h2>
+          <h4>Training Events</h4>
           <div className="training-events-page__events-list">
             { trainingEvents.map(event => (
               <div
                 className="training-events-page__event"
                 key={ event.title }
               >
-                <h3>{ event.title }</h3>
-                { event.subtitle && (
-                  <h4 className="training-events-page__event-subtitle">{ event.subtitle }</h4>
-                ) }
+                <div className="training-events-page__event-meta">
+                  <h4>{ event.title }</h4>
+                  { event.subtitle && (
+                    <h6 className="training-events-page__event-subtitle">{ event.subtitle }</h6>
+                  ) }
+                </div>
                 <SanityBody>
                   { event.description }
                 </SanityBody>
@@ -54,17 +57,19 @@ export default async function TrainingAndEventsPage() {
           as="section"
           className="training-events-page__section training-events-page__events"
         >
-          <h2>Other Events</h2>
+          <h4>Other Events</h4>
           <div className="training-events-page__events-list">
             { otherEvents.map(event => (
               <div
                 className="training-events-page__event"
                 key={ event.title }
               >
-                <h3>{ event.title }</h3>
-                { event.subtitle && (
-                  <h4 className="training-events-page__event-subtitle">{ event.subtitle }</h4>
-                ) }
+                <div className="training-events-page__event-meta">
+                  <h4>{ event.title }</h4>
+                  { event.subtitle && (
+                    <h6 className="training-events-page__event-subtitle">{ event.subtitle }</h6>
+                  ) }
+                </div>
                 <SanityBody>
                   { event.description }
                 </SanityBody>

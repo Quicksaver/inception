@@ -1,38 +1,58 @@
 @use 'scss/breakpoint' as *;
 
+.training-events-page {
+  background-image: linear-gradient(to bottom, transparent, var(--color-grey-100) calc(var(--spacing) * 45));
+}
+
+.training-events-page__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--main-gap);
+}
+
 .training-events-page__section {
-  padding-top: var(--sp-16);
-  padding-bottom: var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
 
-  @include breakpoint(until-tablet) {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-12);
-
-    &:first-child {
-      padding-top: var(--sp-8);
-    }
-  }
-
-  &:first-child {
-    padding-top: var(--sp-12);
+  h4 {
+    color: var(--color-text-light);
+    text-align: center;
   }
 }
 
 .training-events-page__events-list {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-8);
+  gap: var(--sp-12);
+  padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
-    gap: var(--sp-6);
+    gap: var(--sp-8);
+    padding-block: var(--sp-4);
   }
 }
 
 .training-events-page__event {
-  padding: var(--sp-6);
-  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: var(--sp-12);
+  border-radius: var(--sp-10);
+  background-color: var(--color-white);
 
   @include breakpoint(until-tablet) {
-    padding: var(--sp-4);
+    gap: var(--sp-8);
+    padding: var(--sp-10);
+  }
+
+  h4,
+  h6 {
+    color: var(--color-text-light);
+    text-align: start;
+  }
+
+  .sanity-body {
+    gap: var(--sp-4);
   }
 }

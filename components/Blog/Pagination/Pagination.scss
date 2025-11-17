@@ -1,36 +1,35 @@
 @use 'scss/breakpoint' as *;
 
 .blog-pagination {
-  padding-bottom: 48px;
+  padding-bottom: var(--sp-12);
 
   @include breakpoint(until-tablet) {
-    padding-bottom: 32px;
+    padding-bottom: var(--sp-8);
   }
 
   .pagination-item__link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: var(--sp-8);
+    height: var(--sp-8);
     font-size: var(--font-size-label);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
+    font-weight: var(--font-weight-medium);
 
     svg {
-      width: 12px;
+      width: calc(var(--sp-3) + 1px);
     }
   }
 
   .pagination-item__link--previous {
     svg {
-      transform: rotate(90deg);
+      transform: translateY(1px) rotate(90deg);
+      border-right: 1px solid transparent;
     }
 
     &:hover {
       svg {
-        border-right: 1px solid currentcolor;
+        border-color: currentcolor;
       }
     }
   }
@@ -38,12 +37,13 @@
   .pagination-item__link--next {
     /* stylelint-disable-next-line no-descending-specificity */
     svg {
-      transform: rotate(-90deg);
+      transform: translateY(1px) rotate(-90deg);
+      border-left: 1px solid transparent;
     }
 
     &:hover {
       svg {
-        border-left: 1px solid currentcolor;
+        border-color: currentcolor;
       }
     }
   }

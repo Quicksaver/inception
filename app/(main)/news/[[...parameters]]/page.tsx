@@ -2,15 +2,17 @@ import { Metadata } from 'next';
 
 import BlogList from 'components/Blog/List';
 import BlogPagination from 'components/Blog/Pagination';
+import Container from 'components/Container';
 import Main from 'components/Main';
+import PageTitle from 'components/Page/Title';
 
 import { setBlogParameters } from 'utils/blog';
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'News/Blog',
 };
 
-export default async function BlogPage({
+export default async function NewsPage({
   params,
 }: {
   params: Promise<{
@@ -22,6 +24,9 @@ export default async function BlogPage({
 
   return (
     <Main>
+      <Container>
+        <PageTitle>News / Blog</PageTitle>
+      </Container>
       <BlogList />
       <BlogPagination />
     </Main>

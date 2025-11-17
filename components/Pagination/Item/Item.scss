@@ -1,17 +1,17 @@
 .pagination-item__link {
-  &:not(:hover) {
-    text-decoration: none;
+  &:hover {
+    text-decoration: underline;
   }
 
   svg {
-    width: 12px;
+    width: var(--sp-3);
   }
 }
 
 .pagination-item__link--active {
   pointer-events: none;
   cursor: default;
-  background-color: var(--color-accent-gold-light);
+  background-color: var(--color-grey-300);
 }
 
 .pagination-item__link--break {

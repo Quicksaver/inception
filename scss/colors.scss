@@ -1,29 +1,34 @@
 :root {
+  --color-brand-primary: #1100fe;
+  --color-brand-secondary: #00cbfe;
+  --color-brand-tertiary: #c7f3fe;
+
   // Grey colors
   --color-grey-50: #f4f5f5;
-  --color-grey-100: #eaebec;
+  --color-grey-100: #ecf5f8;
   --color-grey-200: #e1e2e4;
-  --color-grey-300: #d2d4d6;
-  --color-grey-400: #c4c7ca;
+  --color-grey-300: #d5d5d5;
+  --color-grey-400: #c6d6dd;
   --color-grey-500: #a1a7aa;
   --color-grey-600: #7c8388;
-  --color-grey-700: #53575b;
+  --color-grey-700: #515151;
   --color-grey-800: #43474a;
   --color-grey-900: #3a3e40;
-  --color-grey-950: #181a1b;
+  --color-grey-950: #1a1a1a;
 
   // UI colors
   --color-black: var(--color-grey-950);
   --color-white: #fff;
+  --color-text-light: #5067b9;
   --color-success: var(--color-grey-500);
   --color-warning: var(--color-grey-800);
   --color-error: #c63c3c;
-  --background-color: var(--color-white);
-  --text-color: var(--color-black);
-  --border-color: var(--text-color);
+  --color-background: var(--color-white);
+  --color-text: var(--color-black);
+  --color-border: var(--color-text);
 }
 
 body {
-  color: var(--text-color);
-  background-color: var(--background-color);
+  color: var(--color-text);
+  background-color: var(--color-background);
 }
