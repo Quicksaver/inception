@@ -2,6 +2,7 @@ import Container from 'components/Container';
 import Image from 'components/Image';
 import Link from 'components/Link';
 import Main from 'components/Main';
+import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
 import { fetchAssociatedPartners } from 'studio/queries/associatedPartners';
@@ -19,10 +20,12 @@ export default async function ConsortiumPage() {
     <Main className="consortium-page">
       { consortium && (
         <Container className="consortium-page__section">
-          <h1>{ consortium.title }</h1>
-          <SanityBody>
-            { consortium.content }
-          </SanityBody>
+          <PageTitle>{ consortium.title }</PageTitle>
+          { !!consortium.content && (
+            <SanityBody>
+              { consortium.content }
+            </SanityBody>
+          ) }
         </Container>
       ) }
 
@@ -31,11 +34,10 @@ export default async function ConsortiumPage() {
           as="section"
           className="consortium-page__section consortium-page__beneficiaries"
         >
-          <h2>Beneficiaries</h2>
+          <h4>Beneficiaries</h4>
           <div className="consortium-page__beneficiaries-list">
-            { }
             { beneficiaries.map(item => (
-              <div
+              <article
                 className="consortium-page__beneficiary"
                 key={ item.title }
               >
@@ -53,14 +55,14 @@ export default async function ConsortiumPage() {
                 ) }
                 <div className="consortium-page__beneficiary-content">
                   <Link href={ item.link || '' }>
-                    <h3>{ item.title }</h3>
+                    <h4>{ item.title }</h4>
                   </Link>
-                  <h4>{ item.subtitle }</h4>
+                  <h6>{ item.subtitle }</h6>
                   <SanityBody>
                     { item.content }
                   </SanityBody>
                 </div>
-              </div>
+              </article>
             )) }
           </div>
         </Container>
@@ -71,7 +73,7 @@ export default async function ConsortiumPage() {
           as="section"
           className="consortium-page__section consortium-page__partners"
         >
-          <h2>Associated Partners</h2>
+          <h4>Associated Partners</h4>
           <div className="consortium-page__partners-list">
             { partners.map((partner, idx) => (
               <Link

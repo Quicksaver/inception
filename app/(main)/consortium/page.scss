@@ -1,21 +1,18 @@
 @use 'scss/breakpoint' as *;
 @use 'scss/spacing' as *;
 
+.consortium-page {
+  background-image: linear-gradient(to bottom, transparent, var(--color-grey-100) calc(var(--spacing) * 45));
+}
+
 .consortium-page__section {
-  padding-top: var(--sp-16);
-  padding-bottom: var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
 
-  @include breakpoint(until-tablet) {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-12);
-
-    &:first-child {
-      padding-top: var(--sp-8);
-    }
-  }
-
-  &:first-child {
-    padding-top: var(--sp-12);
+  h4 {
+    color: var(--color-text-light);
+    text-align: center;
   }
 }
 
@@ -23,23 +20,32 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-12);
+  padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
     gap: var(--sp-8);
+    padding-block: var(--sp-4);
   }
 }
 
 .consortium-page__beneficiary {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: var(--sp-6);
-  padding: var(--sp-6);
-  border: 1px solid var(--color-border);
+  grid-template-columns: calc(var(--spacing) * 50) minmax(0, 1fr);
+  column-gap: var(--sp-10);
+  padding: var(--sp-12);
+  border-radius: var(--sp-10);
+  background-color: var(--color-white);
 
   @include breakpoint(until-tablet) {
     grid-template-columns: 1fr;
-    gap: var(--sp-4);
+    gap: var(--sp-8);
     padding: var(--sp-4);
+  }
+
+  h4,
+  h6 {
+    color: var(--color-text-light);
+    text-align: start;
   }
 }
 
@@ -52,12 +58,12 @@
     flex-flow: row wrap;
 
     img {
-      width: calc(50% - var(--sp-2));
+      max-width: calc(50% - var(--sp-2));
     }
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
   }
@@ -67,31 +73,33 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: var(--sp-5);
+
+  p {
+    margin-block-start: var(--sp-3);
+  }
 }
 
 .consortium-page__partners-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--spacing) * 72), 1fr));
   gap: var(--sp-6);
-
-  @include breakpoint(until-tablet) {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: var(--sp-4);
-  }
+  padding-block: var(--sp-6);
 }
 
 .consortium-page__partner {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--sp-4);
-  border: 1px solid var(--color-border);
+  aspect-ratio: 288 / 217;
+  padding: var(--sp-12);
+  border-radius: var(--sp-10);
+  background-color: var(--color-white);
 
   img {
     width: 100%;
+    max-width: 100%;
     height: auto;
-    max-height: 80px;
+    max-height: 100%;
     object-fit: contain;
   }
 }
