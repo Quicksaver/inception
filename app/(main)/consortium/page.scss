@@ -39,7 +39,7 @@
   @include breakpoint(until-tablet) {
     grid-template-columns: 1fr;
     gap: var(--sp-8);
-    padding: var(--sp-4);
+    padding: var(--sp-10);
   }
 
   h4,
