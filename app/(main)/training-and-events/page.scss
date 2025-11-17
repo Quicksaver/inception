@@ -1,11 +1,7 @@
 @use 'scss/breakpoint' as *;
 
 .training-events-page {
-  background-image: linear-gradient(
-    to bottom,
-    transparent calc(var(--spacing) * 120),
-    var(--color-grey-100) calc(var(--spacing) * 165)
-  );
+  background-image: linear-gradient(to bottom, transparent, var(--color-grey-100) calc(var(--spacing) * 45));
 }
 
 .training-events-page__intro {
@@ -28,10 +24,12 @@
 .training-events-page__events-list {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-8);
+  gap: var(--sp-12);
+  padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
-    gap: var(--sp-6);
+    gap: var(--sp-8);
+    padding-block: var(--sp-4);
   }
 }
 
