@@ -56,16 +56,17 @@
 
   @include breakpoint(until-tablet) {
     flex-flow: row wrap;
-
-    img {
-      max-width: calc(50% - var(--sp-2));
-    }
+    justify-content: center;
   }
 
   img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
+
+    @include breakpoint(until-tablet) {
+      max-width: calc(50% - var(--sp-2));
+    }
   }
 }
 

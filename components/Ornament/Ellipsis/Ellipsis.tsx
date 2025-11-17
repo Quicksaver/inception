@@ -7,6 +7,7 @@ export default function OrnamentEllipsis() {
 
   return (
     <svg
+      aria-hidden="true"
       className="ornament-ellipsis"
       fill="none"
       viewBox="0 0 390 390"
@@ -16,7 +17,7 @@ export default function OrnamentEllipsis() {
         cx="195"
         cy="195"
         fill="#ffffff"
-        fill-opacity="0.45"
+        fillOpacity="0.45"
         r="128.5"
         stroke={ `url(#paint0_linear_${id})` }
       />
@@ -24,7 +25,7 @@ export default function OrnamentEllipsis() {
         cx="195"
         cy="195"
         fill="#ffffff"
-        fill-opacity="0.45"
+        fillOpacity="0.45"
         r="194.5"
         stroke={ `url(#paint1_linear_${id})` }
       />
@@ -44,10 +45,10 @@ export default function OrnamentEllipsis() {
           y1="65.9999"
           y2="324"
         >
-          <stop stop-color="#bbe3fc" />
+          <stop stopColor="#bbe3fc" />
           <stop
             offset="1"
-            stop-color="#bbe3fc"
+            stopColor="#bbe3fc"
           />
         </linearGradient>
         <linearGradient
@@ -59,12 +60,12 @@ export default function OrnamentEllipsis() {
           y2="0"
         >
           <stop
-            stop-color="#bbe3fc"
-            stop-opacity="0"
+            stopColor="#bbe3fc"
+            stopOpacity="0"
           />
           <stop
             offset="1"
-            stop-color="#bbe3fc"
+            stopColor="#bbe3fc"
           />
         </linearGradient>
         <linearGradient
@@ -76,12 +77,12 @@ export default function OrnamentEllipsis() {
           y2="90.9999"
         >
           <stop
-            stop-color="#bbe3fc"
-            stop-opacity="0"
+            stopColor="#bbe3fc"
+            stopOpacity="0"
           />
           <stop
             offset="1"
-            stop-color="#bbe3fc"
+            stopColor="#bbe3fc"
           />
         </linearGradient>
       </defs>

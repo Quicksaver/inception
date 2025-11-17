@@ -1,6 +1,7 @@
 export default function OrnamentText() {
   return (
     <svg
+      aria-hidden="true"
       className="ornament-text"
       fill="none"
       viewBox="0 0 150 4"
