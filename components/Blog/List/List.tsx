@@ -1,5 +1,6 @@
 import BlogTeaser from 'components/Blog/Teaser';
 import Container from 'components/Container';
+import OrnamentText from 'components/Ornament/Text';
 
 import { fetchPublishedBlogArticles } from 'studio/queries/blog';
 import { getBlogParameters } from 'utils/blog';
@@ -26,7 +27,7 @@ export default async function BlogList() {
   if (!articles.length) {
     return (
       <Container className="blog-list">
-        <p className="blog-list__empty">No articles found.</p>
+        <p className="blog-list__empty">Coming soon.</p>
       </Container>
     );
   }
@@ -41,6 +42,7 @@ export default async function BlogList() {
             article={ articles[0] }
             featured
           />
+          <OrnamentText />
         </div>
       ) }
 

@@ -7,6 +7,14 @@
   align-items: flex-start;
   width: 100%;
 
+  .link {
+    --link-color: var(--color-text-light);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   h2 {
     color: var(--color-text-light);
   }
@@ -104,8 +112,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    margin-inline: auto;
     padding-left: 2.5em;
-    border-left: 0.1em solid var(--color-text-light);
 
     .icon-quote {
       position: absolute;

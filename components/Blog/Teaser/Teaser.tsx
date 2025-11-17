@@ -43,7 +43,7 @@ export default function BlogTeaser({
       className={ clsx('blog-teaser', {
         'blog-teaser--featured': featured,
       }) }
-      href={ `/blog/article/${slug.current}` }
+      href={ `/news/article/${slug.current}` }
     >
       <div className="blog-teaser__image">
         <Image

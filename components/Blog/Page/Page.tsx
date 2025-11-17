@@ -105,7 +105,7 @@ export default function BlogPage({ article }: BlogPageProps) {
         { !!previousSlug && (
           <Button
             className="blog-page__previous"
-            href={ `/blog/article/${previousSlug}` }
+            href={ `/news/article/${previousSlug}` }
             theme="outline"
           >
             <IconChevron />
@@ -116,7 +116,7 @@ export default function BlogPage({ article }: BlogPageProps) {
         { !!nextSlug && (
           <Button
             className="blog-page__next"
-            href={ `/blog/article/${nextSlug}` }
+            href={ `/news/article/${nextSlug}` }
             theme="outline"
           >
             Next Article

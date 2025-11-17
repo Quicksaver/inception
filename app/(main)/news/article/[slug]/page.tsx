@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import BlogPage from 'components/Blog/Page';
+import Main from 'components/Main';
 
 import { fetchBlogArticleBySlug } from 'studio/queries/blog';
 import { type PagePropsWithSlug } from 'types/next';
@@ -29,6 +30,8 @@ export default async function BlogSlugPage({ params }: PagePropsWithSlug) {
   }
 
   return (
-    <BlogPage article={ article } />
+    <Main>
+      <BlogPage article={ article } />
+    </Main>
   );
 }
