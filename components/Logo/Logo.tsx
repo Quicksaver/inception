@@ -75,10 +75,10 @@ export default function Logo({
           y1="42.3429"
           y2="42.3429"
         >
-          <stop stop-color="#1100FE" />
+          <stop stopColor="#1100FE" />
           <stop
             offset="1"
-            stop-color="#00CBFE"
+            stopColor="#00CBFE"
           />
         </linearGradient>
       </defs>
