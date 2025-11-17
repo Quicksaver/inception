@@ -7,7 +7,7 @@ import './Button.scss';
 interface ButtonElementProps {
   active?: boolean;
   href?: null | string | URL;
-  theme?: 'gold' | 'grey' | 'grey-outline' | 'link' | 'none' | 'outline' | 'primary';
+  theme?: 'none' | 'primary';
 }
 
 type ButtonProps = ButtonElementProps

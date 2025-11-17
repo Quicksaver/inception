@@ -1,13 +1,14 @@
 .button {
-  --button-padding-x: 32px;
-  --button-padding-y: 12px;
+  --button-padding-x: var(--sp-8);
+  --button-padding-y: var(--sp-3);
 
   display: inline-flex;
-  gap: 12px;
+  gap: var(--sp-3);
   align-items: center;
   justify-content: center;
   padding: var(--button-padding-y) var(--button-padding-x);
   border: 1px solid var(--button-border-color);
+  border-radius: var(--sp-10);
   color: var(--button-color);
   background-color: var(--button-background-color);
 
@@ -27,41 +28,14 @@
   }
 
   .icon {
-    height: 24px;
-    margin: -4px 0;
+    height: var(--sp-6);
+    margin: calc(var(--sp-1) * -1) 0;
   }
 
   &[disabled] {
     pointer-events: none;
     opacity: 0.7;
   }
-}
-
-.button--gold {
-  --button-background-color: var(--color-accent-gold-xlight);
-  --button-background-color-hover: var(--color-aqua-400);
-  --button-border-color: var(--color-accent-gold-xlight);
-  --button-border-color-hover: var(--color-aqua-400);
-  --button-color: var(--color-black);
-  --button-color-hover: var(--color-black);
-}
-
-.button--grey {
-  --button-background-color: var(--color-grey-700);
-  --button-background-color-hover: var(--color-accent-gold);
-  --button-border-color: var(--color-grey-700);
-  --button-border-color-hover: var(--color-accent-gold);
-  --button-color: var(--color-white);
-  --button-color-hover: var(--color-black);
-}
-
-.button--grey-outline {
-  --button-background-color: var(--color-grey-50);
-  --button-background-color-hover: var(--color-aqua-400);
-  --button-border-color: var(--color-grey-200);
-  --button-border-color-hover: var(--color-aqua-400);
-  --button-color: var(--color-black);
-  --button-color-hover: var(--color-black);
 }
 
 .button--link {
@@ -86,20 +60,11 @@
   --button-color-hover: var(--color-black);
 }
 
-.button--outline {
-  --button-background-color: transparent;
-  --button-background-color-hover: var(--color-aqua-400);
-  --button-border-color: var(--color-black);
-  --button-border-color-hover: var(--color-aqua-400);
-  --button-color: var(--color-black);
-  --button-color-hover: var(--color-black);
-}
-
 .button--primary {
-  --button-background-color: var(--color-black);
-  --button-background-color-hover: var(--color-aqua-400);
-  --button-border-color: var(--color-black);
-  --button-border-color-hover: var(--color-aqua-400);
+  --button-background-color: var(--color-brand-primary);
+  --button-background-color-hover: var(--color-brand-secondary);
+  --button-border-color: var(--color-brand-primary);
+  --button-border-color-hover: var(--color-brand-secondary);
   --button-color: var(--color-white);
   --button-color-hover: var(--color-black);
 }
