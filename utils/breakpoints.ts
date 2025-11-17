@@ -4,6 +4,7 @@ const breakpoints = {
   fullhd: 1920,
   wide: 1680,
   large: 1440,
+  maxcontainer: 1296,
   desktop: 1200,
   landscape: 992,
   tablet: 840,

@@ -11,6 +11,18 @@ import { fetchAbout } from 'studio/queries/about';
 
 import './page.scss';
 
+const withImageSizes = [
+  {
+    condition: 'until-portrait' as const,
+    size: '100vw' as const,
+  },
+  {
+    condition: 'until-maxcontainer' as const,
+    size: '41.5vw' as const,
+  },
+  { size: '484px' as const },
+];
+
 export default async function MainPage() {
   const about = await fetchAbout();
 
@@ -87,6 +99,7 @@ export default async function MainPage() {
 
                   <Image
                     alt={ section.alt }
+                    sizes={ withImageSizes }
                     src={ section.image }
                   />
                 </div>

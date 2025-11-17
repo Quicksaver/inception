@@ -33,6 +33,7 @@ export default async function DCPositionsPage() {
 
                   <Image
                     alt={ position.name || 'Position holder' }
+                    sizes="144px"
                     src={ position.image }
                   />
                 </div>

@@ -11,6 +11,30 @@ import { fetchConsortium } from 'studio/queries/consortium';
 
 import './page.scss';
 
+const beneficiaryImageSizes = [
+  {
+    condition: 'until-tablet' as const,
+    size: '50vw' as const,
+  },
+  { size: '200px' as const },
+];
+
+const partnerImageSizes = [
+  {
+    condition: 'max-width: 663px' as const,
+    size: '100vw' as const,
+  },
+  {
+    condition: 'max-width: 975px' as const,
+    size: '50vw' as const,
+  },
+  {
+    condition: 'until-maxcontainer' as const,
+    size: '33.3vw' as const,
+  },
+  { size: '192px' as const },
+];
+
 export default async function ConsortiumPage() {
   const consortium = await fetchConsortium();
   const beneficiaries = await fetchBeneficiaries();
@@ -43,11 +67,12 @@ export default async function ConsortiumPage() {
               >
                 { item.images.length > 0 && (
                   <div className="consortium-page__beneficiary-images">
-                    { item.images.map((image, idx) => (
+                    { item.images.map(image => (
                       <Image
                         alt={ item.title || 'Beneficiary image' }
-                        // eslint-disable-next-line react/no-array-index-key
-                        key={ idx }
+
+                        key={ image.asset?._id }
+                        sizes={ beneficiaryImageSizes }
                         src={ image }
                       />
                     )) }
@@ -85,6 +110,7 @@ export default async function ConsortiumPage() {
               >
                 <Image
                   alt={ partner.title || 'Partner logo' }
+                  sizes={ partnerImageSizes }
                   src={ partner.image }
                 />
               </Link>
