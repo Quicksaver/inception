@@ -3,6 +3,7 @@ import FooterNavigation from 'components/Footer/Navigation';
 import Link from 'components/Link';
 import Logo from 'components/Logo';
 import OrnamentText from 'components/Ornament/Text';
+import SocialLinks from 'components/Social/Links';
 
 import { getSiteSettings } from 'utils/siteSettings';
 
@@ -22,6 +23,7 @@ export default async function Footer() {
           >
             <Logo />
           </Link>
+          <SocialLinks />
         </div>
 
         <FooterNavigation />
