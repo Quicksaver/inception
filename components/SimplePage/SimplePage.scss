@@ -1,7 +1,5 @@
 .simple-page {
-  --container-padding-y: 48px;
-
   display: flex;
   flex-direction: column;
-  gap: 85px;
+  gap: var(--main-gap);
 }
