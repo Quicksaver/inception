@@ -78,21 +78,21 @@
 ```scss
 // components/Button/Button.scss
 .button {
-  --button-color: var(--color-black);
-  --button-background: var(--color-white);
+  --button-color: var(--color-secondary);
+  --button-background: var(--color-primary);
 
   color: var(--button-color);
   background-color: var(--button-background);
 }
 
 .button--primary {
-  --button-color: var(--color-white);
-  --button-background: var(--color-black);
+  --button-color: var(--color-primary);
+  --button-background: var(--color-secondary);
 }
 
 // components/Main/Sub/Item/Item.scss
 .main-sub-item {
-  --main-sub-item-background: var(--color-white);
+  --main-sub-item-background: var(--color-primary);
   --main-sub-item-border: var(--color-gray);
 }
 
@@ -130,7 +130,7 @@ Use global CSS custom properties directly.
 // @use 'scss/fonts' as *; /* Font size variables */
 
 .item {
-  color: var(--color-black);
+  color: var(--color-secondary);
   font-size: var(--font-size-label);
   font-family: var(--font-main); /* ❌ don't set if main font */
   font-family: var(--font-monospace); /* ✅ set if not main font */

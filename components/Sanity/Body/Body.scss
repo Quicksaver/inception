@@ -8,7 +8,7 @@
   width: 100%;
 
   .link {
-    --link-color: var(--color-text-light);
+    --link-color: var(--color-text-secondary);
 
     &:hover {
       text-decoration: underline;
@@ -16,15 +16,15 @@
   }
 
   h2 {
-    color: var(--color-text-light);
+    color: var(--color-text-secondary);
   }
 
   h3 {
-    color: var(--color-text-light);
+    color: var(--color-text-secondary);
   }
 
   h4 {
-    color: var(--color-text-light);
+    color: var(--color-text-secondary);
   }
 
   strong {
@@ -37,7 +37,7 @@
 
   > :not(.sanity-code) code {
     padding: 0.1em;
-    border: 1px solid var(--color-text-light);
+    border: 1px solid var(--color-text-secondary);
     border-radius: 0.1em;
     color: var(--color-brand-secondary);
   }
@@ -59,7 +59,7 @@
         position: absolute;
         top: 0;
         left: 0.25em;
-        color: var(--color-text-light);
+        color: var(--color-text-secondary);
       }
     }
   }
@@ -92,17 +92,16 @@
     position: relative;
     align-self: center;
     width: 100%;
-    max-width: min(calc(var(--spacing) * 175), 95%);
 
     img {
-      width: 100%;
+      width: calc(100% + (var(--spacing) * 55));
       border-radius: var(--theme-border-radius);
     }
 
     figcaption {
       margin-top: calc(var(--sanity-body-gap) / 2.5);
       font-size: var(--font-size-label);
-      color: var(--color-text-light);
+      color: var(--color-text-secondary);
       text-align: center;
     }
   }
@@ -113,15 +112,17 @@
     flex-direction: column;
     gap: 0.5em;
     margin-inline: auto;
-    padding-left: 2.5em;
+    padding-left: calc(var(--spacing) * 11);
+    font-size: var(--font-h5);
+    color: var(--color-text-tertiary);
 
     .icon-quote {
       position: absolute;
       z-index: 0;
       left: 0;
-      width: 2em;
-      height: 2em;
-      color: var(--color-grey-400);
+      width: 115px;
+      height: 94px;
+      color: var(--color-surface);
     }
 
     p {
@@ -129,9 +130,9 @@
     }
 
     cite {
-      font-size: 0.9em;
+      position: relative;
       font-weight: var(--font-weight-medium);
-      color: var(--color-text-light);
+      color: var(--color-text-secondary);
     }
   }
 }

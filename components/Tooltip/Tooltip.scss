@@ -6,9 +6,9 @@
   padding: 8px 12px;
   font-size: var(--font-size-label-small);
   line-height: var(--line-height-small);
-  color: var(--color-white);
-  background-color: var(--color-grey-950);
-  box-shadow: 0 4px 12px alpha(var(--color-grey-950), 20%);
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+  box-shadow: 0 4px 12px alpha(var(--color-secondary), 20%);
 
   &[data-state='delayed-open'][data-side='top'] {
     animation: slide-down-and-fade 200ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -28,7 +28,7 @@
 }
 
 .tooltip__arrow {
-  fill: var(--color-grey-950);
+  fill: var(--color-secondary);
 }
 
 @keyframes slide-down-and-fade {

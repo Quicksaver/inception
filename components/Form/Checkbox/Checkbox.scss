@@ -1,10 +1,10 @@
 @use 'scss/alpha' as *;
 
 .form-checkbox {
-  --form-checkbox-check-size: 18px;
+  --form-checkbox-check-size: calc(var(--spacing) * 4.5);
 
   display: flex;
-  gap: 8px;
+  gap: var(--sp-2);
   align-items: center;
 }
 
@@ -52,8 +52,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: calc(var(--form-checkbox-check-size) * 0.5);
-    height: 2px;
-    border-radius: 2px;
+    height: var(--spacing-unit);
+    border-radius: var(--spacing-unit);
     background: var(--color-text);
     transition: all var(--animation-simple-fade);
   }

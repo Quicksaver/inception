@@ -10,7 +10,7 @@
 .date-picker__label {
   font-size: var(--font-size-body-small);
   line-height: var(--line-height-small);
-  color: var(--color-grey-800);
+  color: var(--color-container);
 }
 
 .date-picker__trigger {
@@ -21,19 +21,19 @@
   width: 100%;
   height: 42px;
   padding: 12px;
-  border: 1px solid var(--color-grey-200);
+  border: 1px solid var(--color-brand-secondary);
   font-size: var(--font-size-body-small);
   font-weight: var(--font-weight-medium);
-  color: var(--color-grey-700);
+  color: var(--color-container);
   text-align: left;
-  background-color: var(--color-grey-50);
+  background-color: var(--color-surface);
 
   &:hover {
-    background-color: var(--color-grey-100);
+    background-color: var(--color-neutral);
   }
 
   &:focus {
-    border-color: var(--color-primary, var(--color-grey-800));
+    border-color: var(--color-primary, var(--color-container));
     outline: none;
   }
 }
@@ -42,7 +42,7 @@
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  color: var(--color-grey-700);
+  color: var(--color-container);
 }
 
 .date-picker__value {
@@ -52,8 +52,8 @@
 .date-picker__content {
   z-index: var(--z-popover);
   padding: 12px;
-  border: 1px solid var(--color-grey-200);
-  background-color: var(--color-white);
+  border: 1px solid var(--color-brand-secondary);
+  background-color: var(--color-primary);
   box-shadow:
     0 10px 15px -3px rgb(0 0 0 / 10%),
     0 4px 6px -2px rgb(0 0 0 / 5%);
@@ -98,9 +98,9 @@
   .rdp-dropdown {
     cursor: pointer;
     padding: 4px 8px;
-    border: 1px solid var(--color-grey-200);
+    border: 1px solid var(--color-brand-secondary);
     font-size: var(--font-size-body-small);
-    background-color: var(--color-white);
+    background-color: var(--color-primary);
   }
 
   .rdp-table {
@@ -113,7 +113,7 @@
     height: 32px;
     font-size: var(--font-size-body-small);
     font-weight: var(--font-weight-medium);
-    color: var(--color-grey-500);
+    color: var(--color-brand-tertiary);
     text-align: center;
   }
 
@@ -134,26 +134,26 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: var(--color-grey-100);
+      background-color: var(--color-neutral);
     }
   }
 
   .rdp-day_selected {
-    color: var(--color-white);
-    background-color: var(--color-grey-800);
+    color: var(--color-primary);
+    background-color: var(--color-container);
 
     &:hover {
-      background-color: var(--color-grey-700);
+      background-color: var(--color-container);
     }
   }
 
   .rdp-day_today {
     font-weight: var(--font-weight-medium);
-    color: var(--color-grey-800);
+    color: var(--color-container);
   }
 
   .rdp-day_outside {
-    color: var(--color-grey-300);
+    color: var(--color-medium);
   }
 
   .rdp-day_disabled {
@@ -182,7 +182,7 @@
     background-color: transparent;
 
     &:hover {
-      background-color: var(--color-grey-100);
+      background-color: var(--color-neutral);
     }
 
     &:disabled {

@@ -1,7 +1,10 @@
+import Box from 'components/Box';
 import Container from 'components/Container';
 import Image from 'components/Image';
 import Link from 'components/Link';
 import Main from 'components/Main';
+import PageList from 'components/Page/List';
+import PageSection from 'components/Page/Section';
 import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
@@ -43,7 +46,7 @@ export default async function ConsortiumPage() {
   return (
     <Main className="consortium-page">
       { consortium && (
-        <Container className="consortium-page__section">
+        <Container className="consortium-page__intro">
           <PageTitle>{ consortium.title }</PageTitle>
           { !!consortium.content && (
             <SanityBody>
@@ -54,14 +57,12 @@ export default async function ConsortiumPage() {
       ) }
 
       { beneficiaries.length > 0 && (
-        <Container
-          as="section"
-          className="consortium-page__section consortium-page__beneficiaries"
-        >
+        <PageSection>
           <h4>Beneficiaries</h4>
-          <div className="consortium-page__beneficiaries-list">
+          <PageList className="consortium-page__beneficiaries-list">
             { beneficiaries.map(item => (
-              <article
+              <Box
+                as="article"
                 className="consortium-page__beneficiary"
                 key={ item.title }
               >
@@ -87,21 +88,19 @@ export default async function ConsortiumPage() {
                     { item.content }
                   </SanityBody>
                 </div>
-              </article>
+              </Box>
             )) }
-          </div>
-        </Container>
+          </PageList>
+        </PageSection>
       ) }
 
       { partners.length > 0 && (
-        <Container
-          as="section"
-          className="consortium-page__section consortium-page__partners"
-        >
+        <PageSection>
           <h4>Associated Partners</h4>
-          <div className="consortium-page__partners-list">
+          <PageList className="consortium-page__partners-list">
             { partners.map((partner, idx) => (
-              <Link
+              <Box
+                as={ Link }
                 className="consortium-page__partner"
                 href={ partner.link || '' }
                 // eslint-disable-next-line react/no-array-index-key
@@ -113,10 +112,10 @@ export default async function ConsortiumPage() {
                   sizes={ partnerImageSizes }
                   src={ partner.image }
                 />
-              </Link>
+              </Box>
             )) }
-          </div>
-        </Container>
+          </PageList>
+        </PageSection>
       ) }
     </Main>
   );

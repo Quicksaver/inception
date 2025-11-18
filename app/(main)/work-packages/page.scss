@@ -1,9 +1,5 @@
 @use 'scss/breakpoint' as *;
 
-.work-packages-page {
-  background-image: linear-gradient(to bottom, transparent, var(--color-grey-100) calc(var(--spacing) * 45));
-}
-
 .work-packages-page__intro {
   display: flex;
   flex-direction: column;
@@ -21,12 +17,13 @@
 }
 
 .work-packages-page__list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--sp-12);
   padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
+    grid-template-columns: 1fr;
     gap: var(--sp-8);
     padding-block: var(--sp-4);
   }
@@ -35,23 +32,43 @@
 .work-packages-page__item {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-6);
-  padding: var(--sp-12);
-  border-radius: var(--sp-10);
-  background-color: var(--color-white);
+  gap: var(--sp-4);
+  background-image: linear-gradient(to bottom, var(--color-surface), var(--color-neutral));
 
   @include breakpoint(until-tablet) {
     gap: var(--sp-8);
-    padding: var(--sp-10);
   }
 
   h4,
   h6 {
-    color: var(--color-text-light);
+    color: var(--color-text-secondary);
     text-align: start;
   }
 
   .sanity-body {
-    --sanity-body-gap: var(--sp-4);
+    --sanity-body-gap: var(--sp-3);
+
+    color: var(--color-text-tertiary);
+  }
+}
+
+.work-packages-page__item-tag {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+  align-self: start;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: calc(var(--theme-border-radius) * 0.6);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-primary);
+  background-color: var(--color-medium);
+
+  .icon {
+    --icon-size: calc(var(--spacing) * 4.5);
+
+    &:first-child {
+      margin-inline-start: calc(var(--sp-1) * -1);
+    }
   }
 }

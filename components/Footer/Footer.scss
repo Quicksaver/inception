@@ -6,7 +6,7 @@
 
   position: relative;
   border-top: var(--sp-1) solid var(--color-brand-primary);
-  background-image: radial-gradient(circle at center, var(--color-grey-100), var(--color-white));
+  background-image: radial-gradient(circle at center, var(--color-surface), var(--color-primary));
 
   .container {
     position: relative;
@@ -26,7 +26,7 @@
     grid-area: divider;
     justify-self: center;
     width: calc(var(--spacing) * 38);
-    color: var(--color-text-light);
+    color: var(--color-text-secondary);
   }
 }
 
@@ -37,7 +37,7 @@
   align-items: center;
   justify-self: center;
   font-size: var(--font-size-label);
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
 
   @include breakpoint(until-mobile) {
     align-items: flex-start;

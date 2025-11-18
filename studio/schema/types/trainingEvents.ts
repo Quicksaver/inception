@@ -12,6 +12,10 @@ export const trainingEventsType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'meta',
+      type: 'body',
+    }),
+    defineField({
       name: 'description',
       type: 'body',
     }),

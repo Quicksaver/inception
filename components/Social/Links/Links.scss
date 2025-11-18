@@ -4,11 +4,10 @@
   align-items: center;
 
   .link {
-    --link-color: var(--color-text-light);
+    --link-color: var(--color-text-secondary);
   }
 
   .icon {
-    width: var(--sp-6);
-    height: var(--sp-6);
+    --icon-size: var(--sp-6);
   }
 }

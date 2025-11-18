@@ -7,22 +7,22 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  border: 1px solid var(--color-grey-400);
-  color: var(--color-grey-600);
-  background-color: var(--color-white);
+  border: 1px solid var(--color-brand-tertiary);
+  color: var(--color-text-secondary);
+  background-color: var(--color-primary);
   transition: border-color var(--animation-simple-fade);
 
   &:hover {
-    border-color: var(--color-grey-300);
+    border-color: var(--color-medium);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-grey-400);
+    outline: 2px solid var(--color-brand-tertiary);
     outline-offset: 2px;
   }
 
   &[data-state='open'] {
-    border-color: var(--color-grey-400);
+    border-color: var(--color-brand-tertiary);
   }
 
   &.combobox__trigger--icon {
@@ -76,9 +76,9 @@
   z-index: var(--z-popover);
   min-width: var(--radix-popover-trigger-width);
   max-height: var(--radix-popover-content-available-height);
-  border: 1px solid var(--color-grey-400);
+  border: 1px solid var(--color-brand-tertiary);
   color: var(--color-text);
-  background-color: var(--color-white);
+  background-color: var(--color-primary);
   box-shadow: 0 4px 16px rgb(0 0 0 / 16%);
   animation: fade-in var(--animation-simple-fade);
 
@@ -102,7 +102,7 @@
   align-items: center;
   width: 100%;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--color-grey-400);
+  border-bottom: 1px solid var(--color-brand-tertiary);
 
   /* the key handlers are bound to the input, we can't simply remove it otherwise accessibility
     will break */
@@ -120,26 +120,26 @@
 .combobox__search-input {
   width: 100%;
   border: 0;
-  color: var(--color-grey-700);
+  color: var(--color-container);
   transition: border-color var(--animation-simple-fade);
 
   &::placeholder {
-    color: var(--color-grey-500);
+    color: var(--color-brand-tertiary);
   }
 
   &:focus {
-    color: var(--color-grey-700);
+    color: var(--color-container);
     outline: none;
   }
 
   &:hover {
-    color: var(--color-grey-700);
+    color: var(--color-container);
   }
 }
 
 .combobox__empty-message {
   padding: 12px;
-  color: var(--color-grey-500);
+  color: var(--color-brand-tertiary);
   text-align: center;
 }
 
@@ -152,26 +152,26 @@
   align-items: center;
   padding: 12px 16px;
   font-weight: var(--font-weight-medium);
-  color: var(--color-grey-700);
+  color: var(--color-container);
   outline: none;
   transition: background-color var(--animation-simple-fade);
 
   &:hover {
-    background-color: var(--color-grey-100);
+    background-color: var(--color-neutral);
   }
 
   &:focus {
-    background-color: var(--color-grey-100);
+    background-color: var(--color-neutral);
   }
 
   &[data-state='checked'] {
-    color: var(--color-grey-800);
-    background-color: var(--color-grey-100);
+    color: var(--color-container);
+    background-color: var(--color-neutral);
   }
 
   &[aria-selected='true'] {
-    color: var(--color-grey-800);
-    background-color: var(--color-grey-100);
+    color: var(--color-container);
+    background-color: var(--color-neutral);
   }
 
   &[data-disabled='true'],
@@ -182,7 +182,7 @@
 
   &.combobox__item--clear {
     padding-block: 12px;
-    border-bottom: 1px solid var(--color-grey-400);
+    border-bottom: 1px solid var(--color-brand-tertiary);
     font-weight: var(--font-weight-medium);
   }
 }

@@ -1,0 +1,12 @@
+@use 'scss/breakpoint' as *;
+
+.box {
+  position: relative;
+  padding: var(--sp-12);
+  border-radius: var(--theme-border-radius);
+  background-color: var(--color-primary);
+
+  @include breakpoint(until-tablet) {
+    padding: var(--sp-10);
+  }
+}

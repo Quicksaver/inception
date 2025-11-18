@@ -15,7 +15,7 @@
   max-height: calc(100% - var(--container-padding-y));
   margin-bottom: calc(var(--container-padding-y) / 2);
   margin-left: var(--container-padding-x);
-  border-radius: var(--sp-10);
+  border-radius: var(--theme-border-radius);
   background-color: var(--color-background);
   filter: drop-shadow(0 0 var(--sp-3) rgb(0 0 0 / 20%));
 

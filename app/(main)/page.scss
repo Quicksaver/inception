@@ -8,7 +8,7 @@
   flex-direction: column;
   gap: var(--homepage-gap);
   padding-block: calc(var(--spacing) * 20);
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
 
   &::before {
     content: '';
@@ -16,7 +16,7 @@
     top: 0;
     width: 100%;
     height: calc(var(--spacing) * 136);
-    background: linear-gradient(to bottom, var(--color-grey-100), transparent);
+    background: linear-gradient(to bottom, var(--color-surface), transparent);
   }
 
   .container {
@@ -47,12 +47,12 @@
 
 .homepage__section--editorial {
   z-index: 0;
-  background-color: var(--color-grey-100);
+  background-color: var(--color-surface);
 
   .sanity-body {
     padding: var(--sp-14);
-    border-radius: var(--sp-10);
-    background-color: var(--color-white);
+    border-radius: var(--theme-border-radius);
+    background-color: var(--color-primary);
 
     @include breakpoint(until-portrait) {
       padding: var(--sp-10);
@@ -81,7 +81,7 @@
     left: 0;
     width: 100%;
     height: calc(var(--spacing) * 100);
-    background-image: linear-gradient(to bottom, transparent, var(--color-grey-100));
+    background-image: linear-gradient(to bottom, transparent, var(--color-surface));
   }
 
   &::after {
@@ -92,7 +92,7 @@
     left: 0;
     width: 100%;
     height: calc(var(--spacing) * 100);
-    background-image: linear-gradient(to bottom, var(--color-grey-100), transparent);
+    background-image: linear-gradient(to bottom, var(--color-surface), transparent);
   }
 }
 
@@ -110,7 +110,7 @@
   .sanity-body {
     padding: var(--sp-14);
     border-radius: var(--sp-14);
-    background-color: var(--color-grey-100);
+    background-color: var(--color-surface);
 
     @include breakpoint(until-portrait) {
       padding: var(--sp-10);

@@ -1,5 +1,9 @@
+import Box from 'components/Box';
 import Container from 'components/Container';
+import IconCalendarEvent from 'components/Icon/CalendarEvent';
 import Main from 'components/Main';
+import PageList from 'components/Page/List';
+import PageSection from 'components/Page/Section';
 import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
@@ -26,57 +30,65 @@ export default async function TrainingAndEventsPage() {
       ) }
 
       { trainingEvents.length > 0 && (
-        <Container
-          as="section"
-          className="training-events-page__section training-events-page__events"
-        >
+        <PageSection>
           <h4>Training Events</h4>
-          <div className="training-events-page__events-list">
+          <PageList className="training-events-page__events-list">
             { trainingEvents.map(event => (
-              <div
+              <Box
                 className="training-events-page__event"
                 key={ event.title }
               >
                 <div className="training-events-page__event-meta">
-                  <h4>{ event.title }</h4>
+                  <div className="training-events-page__event-meta-tag">
+                    <IconCalendarEvent />
+                    Event
+                  </div>
+                  <h3>{ event.title }</h3>
                   { event.subtitle && (
                     <h6 className="training-events-page__event-subtitle">{ event.subtitle }</h6>
                   ) }
+                  <SanityBody>
+                    { event.meta }
+                  </SanityBody>
                 </div>
                 <SanityBody>
                   { event.description }
                 </SanityBody>
-              </div>
+              </Box>
             )) }
-          </div>
-        </Container>
+          </PageList>
+        </PageSection>
       ) }
 
       { otherEvents.length > 0 && (
-        <Container
-          as="section"
-          className="training-events-page__section training-events-page__events"
-        >
+        <PageSection>
           <h4>Other Events</h4>
-          <div className="training-events-page__events-list">
+          <PageList className="training-events-page__events-list">
             { otherEvents.map(event => (
-              <div
+              <Box
                 className="training-events-page__event"
                 key={ event.title }
               >
                 <div className="training-events-page__event-meta">
-                  <h4>{ event.title }</h4>
+                  <div className="training-events-page__event-meta-tag">
+                    <IconCalendarEvent />
+                    Event
+                  </div>
+                  <h3>{ event.title }</h3>
                   { event.subtitle && (
                     <h6 className="training-events-page__event-subtitle">{ event.subtitle }</h6>
                   ) }
+                  <SanityBody>
+                    { event.meta }
+                  </SanityBody>
                 </div>
                 <SanityBody>
                   { event.description }
                 </SanityBody>
-              </div>
+              </Box>
             )) }
-          </div>
-        </Container>
+          </PageList>
+        </PageSection>
       ) }
     </Main>
   );
