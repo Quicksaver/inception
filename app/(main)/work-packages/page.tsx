@@ -20,10 +20,7 @@ export default async function WorkPackagesPage() {
 
       { workPackages.length > 0
         ? (
-          <Container
-            as="section"
-            className="work-packages-page__section"
-          >
+          <Container as="section">
             <div className="work-packages-page__list">
               { workPackages.map(workPackage => (
                 <Box

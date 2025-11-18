@@ -6,26 +6,14 @@
   gap: var(--main-gap);
 }
 
-.work-packages-page__section {
-  padding-top: var(--sp-8);
-  padding-bottom: var(--sp-16);
-
-  @include breakpoint(until-tablet) {
-    padding-top: var(--sp-6);
-    padding-bottom: var(--sp-12);
-  }
-}
-
 .work-packages-page__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--sp-12);
-  padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
     grid-template-columns: 1fr;
     gap: var(--sp-8);
-    padding-block: var(--sp-4);
   }
 }
 
