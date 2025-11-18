@@ -8,7 +8,7 @@
   justify-content: center;
   padding: var(--button-padding-y) var(--button-padding-x);
   border: 1px solid var(--button-border-color);
-  border-radius: var(--sp-10);
+  border-radius: var(--theme-border-radius);
   color: var(--button-color);
   background-color: var(--button-background-color);
 
@@ -43,8 +43,8 @@
   --button-background-color-hover: transparent;
   --button-border-color: transparent;
   --button-border-color-hover: transparent;
-  --button-color: var(--color-black);
-  --button-color-hover: var(--color-grey-600);
+  --button-color: var(--color-secondary);
+  --button-color-hover: var(--color-text-secondary);
   --button-padding-x: 0;
   --button-padding-y: 0;
 
@@ -53,11 +53,11 @@
 
 .button--none {
   --button-background-color: transparent;
-  --button-background-color-hover: var(--color-grey-300);
+  --button-background-color-hover: var(--color-medium);
   --button-border-color: transparent;
-  --button-border-color-hover: var(--color-grey-300);
-  --button-color: var(--color-black);
-  --button-color-hover: var(--color-black);
+  --button-border-color-hover: var(--color-medium);
+  --button-color: var(--color-secondary);
+  --button-color-hover: var(--color-secondary);
 }
 
 .button--primary {
@@ -65,6 +65,6 @@
   --button-background-color-hover: var(--color-brand-secondary);
   --button-border-color: var(--color-brand-primary);
   --button-border-color-hover: var(--color-brand-secondary);
-  --button-color: var(--color-white);
-  --button-color-hover: var(--color-black);
+  --button-color: var(--color-primary);
+  --button-color-hover: var(--color-secondary);
 }

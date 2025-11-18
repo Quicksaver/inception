@@ -1,6 +1,8 @@
 import * as AccessibleIcon from '@radix-ui/react-accessible-icon';
 import clsx from 'clsx';
 
+import './Icon.scss';
+
 interface IconProps extends AccessibleIcon.AccessibleIconProps, React.SVGProps<SVGSVGElement> {
   as?: React.ElementType;
   className?: string;

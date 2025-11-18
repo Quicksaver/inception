@@ -1,3 +1,4 @@
+import Box from 'components/Box';
 import Container from 'components/Container';
 import IconUser from 'components/Icon/User';
 import Image from 'components/Image';
@@ -21,7 +22,8 @@ export default async function DCPositionsPage() {
       <Container className="dc-positions-page__list">
         { positions.map(position => {
           return (
-            <section
+            <Box
+              as="section"
               className="dc-positions-page__position"
               key={ position._id }
             >
@@ -53,12 +55,10 @@ export default async function DCPositionsPage() {
                 </div>
               </div>
 
-              { position.description && (
-                <SanityBody className="dc-positions-page__position-description">
-                  { position.description }
-                </SanityBody>
-              ) }
-            </section>
+              <SanityBody className="dc-positions-page__position-description">
+                { position.description }
+              </SanityBody>
+            </Box>
           );
         }) }
       </Container>

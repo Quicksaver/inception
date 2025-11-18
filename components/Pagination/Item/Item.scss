@@ -1,4 +1,6 @@
 .pagination-item__link {
+  color: var(--color-text-tertiary);
+
   &:hover {
     text-decoration: underline;
   }
@@ -11,7 +13,8 @@
 .pagination-item__link--active {
   pointer-events: none;
   cursor: default;
-  background-color: var(--color-grey-300);
+  color: var(--color-primary);
+  background-color: var(--color-brand-primary);
 }
 
 .pagination-item__link--break {

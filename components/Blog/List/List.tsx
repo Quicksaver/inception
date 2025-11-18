@@ -1,6 +1,5 @@
 import BlogTeaser from 'components/Blog/Teaser';
 import Container from 'components/Container';
-import OrnamentText from 'components/Ornament/Text';
 
 import { fetchPublishedBlogArticles } from 'studio/queries/blog';
 import { getBlogParameters } from 'utils/blog';
@@ -42,7 +41,6 @@ export default async function BlogList() {
             article={ articles[0] }
             featured
           />
-          <OrnamentText />
         </div>
       ) }
 

@@ -1,4 +1,6 @@
+import Box from 'components/Box';
 import Container from 'components/Container';
+import IconPackage from 'components/Icon/Package';
 import Main from 'components/Main';
 import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
@@ -18,21 +20,22 @@ export default async function WorkPackagesPage() {
 
       { workPackages.length > 0
         ? (
-          <Container
-            as="section"
-            className="work-packages-page__section"
-          >
+          <Container as="section">
             <div className="work-packages-page__list">
               { workPackages.map(workPackage => (
-                <div
+                <Box
                   className="work-packages-page__item"
                   key={ workPackage.title }
                 >
+                  <div className="work-packages-page__item-tag">
+                    <IconPackage />
+                    Work Package
+                  </div>
                   <h4>{ workPackage.title }</h4>
                   <SanityBody>
                     { workPackage.description }
                   </SanityBody>
-                </div>
+                </Box>
               )) }
             </div>
           </Container>

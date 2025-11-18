@@ -6,8 +6,8 @@
   min-width: 200px;
   max-width: min(640px, 150vw);
   border: 1px solid var(--color-neutral-200);
-  background-color: var(--color-white);
-  filter: drop-shadow(0 4px 24px alpha(var(--color-black), 8%));
+  background-color: var(--color-primary);
+  filter: drop-shadow(0 4px 24px alpha(var(--color-secondary), 8%));
 
   &[data-state='open'][data-side='top'] {
     animation: slide-down-and-fade 200ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -32,8 +32,8 @@
 }
 
 .popover__arrow {
-  filter: drop-shadow(0 4px 24px alpha(var(--color-black), 8%));
-  fill: var(--color-white);
+  filter: drop-shadow(0 4px 24px alpha(var(--color-secondary), 8%));
+  fill: var(--color-primary);
 }
 
 @keyframes slide-down-and-fade {

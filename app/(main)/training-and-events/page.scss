@@ -1,58 +1,86 @@
 @use 'scss/breakpoint' as *;
 
-.training-events-page {
-  background-image: linear-gradient(to bottom, transparent, var(--color-grey-100) calc(var(--spacing) * 45));
-}
-
 .training-events-page__intro {
   display: flex;
   flex-direction: column;
   gap: var(--main-gap);
-}
-
-.training-events-page__section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-6);
-
-  h4 {
-    color: var(--color-text-light);
-    text-align: center;
-  }
+  color: var(--color-text-secondary);
 }
 
 .training-events-page__events-list {
   display: flex;
   flex-direction: column;
   gap: var(--sp-12);
-  padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
     gap: var(--sp-8);
-    padding-block: var(--sp-4);
   }
 }
 
 .training-events-page__event {
+  display: grid;
+  grid-template-areas: 'meta description';
+  grid-template-columns: minmax(calc(var(--spacing) * 75), 1fr) minmax(0, 2fr);
+  gap: var(--sp-10);
+  width: 100%;
+
+  @include breakpoint(until-landscape) {
+    grid-template-columns: minmax(calc(var(--spacing) * 60), 1fr) minmax(0, 2fr);
+  }
+
+  @include breakpoint(until-portrait) {
+    grid-template-areas: 'meta' 'description';
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  > .sanity-body {
+    --sanity-body-gap: var(--sp-4);
+
+    grid-area: description;
+    align-self: stretch;
+    justify-content: center;
+    padding-inline-start: var(--sp-10);
+    border-inline-start: 1px solid var(--color-medium);
+    color: var(--color-text-tertiary);
+
+    @include breakpoint(until-portrait) {
+      padding-inline-start: 0;
+      border-inline-start: none;
+    }
+  }
+}
+
+.training-events-page__event-meta {
   display: flex;
+  grid-area: meta;
   flex-direction: column;
-  gap: var(--sp-6);
-  padding: var(--sp-12);
-  border-radius: var(--sp-10);
-  background-color: var(--color-white);
-
-  @include breakpoint(until-tablet) {
-    gap: var(--sp-8);
-    padding: var(--sp-10);
-  }
-
-  h4,
-  h6 {
-    color: var(--color-text-light);
-    text-align: start;
-  }
+  gap: var(--sp-2);
+  color: var(--color-text-secondary);
 
   .sanity-body {
-    --sanity-body-gap: var(--sp-4);
+    --sanity-body-gap: var(--sp-2);
+  }
+}
+
+.training-events-page__event-meta-tag {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+  align-self: start;
+  margin-bottom: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: calc(var(--theme-border-radius) * 0.6);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-primary);
+  text-transform: uppercase;
+  background-color: var(--color-surface);
+
+  .icon {
+    --icon-size: calc(var(--spacing) * 4.5);
+
+    &:first-child {
+      margin-inline-start: calc(var(--sp-1) * -1);
+    }
   }
 }

@@ -1,30 +1,19 @@
 @use 'scss/breakpoint' as *;
 @use 'scss/spacing' as *;
 
-.consortium-page {
-  background-image: linear-gradient(to bottom, transparent, var(--color-grey-100) calc(var(--spacing) * 45));
-}
-
-.consortium-page__section {
+.consortium-page__intro {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-6);
-
-  h4 {
-    color: var(--color-text-light);
-    text-align: center;
-  }
+  gap: var(--main-gap);
 }
 
 .consortium-page__beneficiaries-list {
   display: flex;
   flex-direction: column;
   gap: var(--sp-12);
-  padding-block: var(--sp-6);
 
   @include breakpoint(until-tablet) {
     gap: var(--sp-8);
-    padding-block: var(--sp-4);
   }
 }
 
@@ -32,20 +21,10 @@
   display: grid;
   grid-template-columns: calc(var(--spacing) * 50) minmax(0, 1fr);
   column-gap: var(--sp-10);
-  padding: var(--sp-12);
-  border-radius: var(--sp-10);
-  background-color: var(--color-white);
 
   @include breakpoint(until-tablet) {
     grid-template-columns: 1fr;
     gap: var(--sp-8);
-    padding: var(--sp-10);
-  }
-
-  h4,
-  h6 {
-    color: var(--color-text-light);
-    text-align: start;
   }
 }
 
@@ -75,8 +54,21 @@
   flex: 1;
   flex-direction: column;
 
-  p {
-    margin-block-start: var(--sp-3);
+  h4,
+  h6 {
+    /* For specificity */
+    .page-section & {
+      color: var(--color-text-secondary);
+      text-align: start;
+    }
+  }
+
+  .sanity-body {
+    color: var(--color-text-tertiary);
+
+    p {
+      margin-block-start: var(--sp-3);
+    }
   }
 }
 
@@ -84,7 +76,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(calc(var(--spacing) * 72), 1fr));
   gap: var(--sp-6);
-  padding-block: var(--sp-6);
 }
 
 .consortium-page__partner {
@@ -92,9 +83,6 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 288 / 217;
-  padding: var(--sp-12);
-  border-radius: var(--sp-10);
-  background-color: var(--color-white);
 
   img {
     width: 100%;

@@ -4,10 +4,11 @@ import { useMemo } from 'react';
 
 import Button from 'components/Button';
 import Container from 'components/Container';
+import IconArrow from 'components/Icon/Arrow';
 import IconChevron from 'components/Icon/Chevron';
 import Image from 'components/Image';
+import Link from 'components/Link';
 import Main from 'components/Main';
-import PageTitle from 'components/Page/Title';
 import SanityBody from 'components/Sanity/Body';
 
 import type { QueryBlogArticleBySlugResult } from 'studio/sanity.types';
@@ -47,7 +48,14 @@ export default function BlogPage({ article }: BlogPageProps) {
     <article className="blog-page">
       <Container>
         <header className="blog-page__header">
-          <PageTitle>{ title }</PageTitle>
+          <Link
+            className="blog-page__back"
+            href="/news"
+          >
+            <IconArrow />
+            News
+          </Link>
+          <h3>{ title }</h3>
 
           <div className="blog-page__meta">
             <span className="blog-page__author">
@@ -81,7 +89,7 @@ export default function BlogPage({ article }: BlogPageProps) {
         </header>
       </Container>
 
-      <div className="blog-page__cover">
+      <Container className="blog-page__cover">
         <Image
           alt={ coverImage.alt || title }
           preload
@@ -91,7 +99,7 @@ export default function BlogPage({ article }: BlogPageProps) {
           ] }
           src={ coverImage }
         />
-      </div>
+      </Container>
 
       { body && (
         <Container>

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
 
+import IconArrow from 'components/Icon/Arrow';
 import Image from 'components/Image';
 import Link from 'components/Link';
 
@@ -53,8 +54,6 @@ export default function BlogTeaser({
         />
       </div>
       <div className="blog-teaser__content">
-        <h5 className="blog-teaser__title">{ title }</h5>
-        <p className="blog-teaser__abstract">{ abstract }</p>
         <div className="blog-teaser__meta">
           <span className="blog-teaser__author">{ author }</span>
           <span className="blog-teaser__separator">•</span>
@@ -65,6 +64,12 @@ export default function BlogTeaser({
             { publishDateStr }
           </time>
         </div>
+        <h3 className="blog-teaser__title">{ title }</h3>
+        <p className="blog-teaser__abstract">{ abstract }</p>
+
+        { featured && (
+          <IconArrow />
+        ) }
       </div>
     </Link>
   );

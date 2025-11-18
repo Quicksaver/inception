@@ -25,7 +25,7 @@ export default async function NewsPage({
   return (
     <Main>
       <Container>
-        <PageTitle>News / Blog</PageTitle>
+        <PageTitle>News</PageTitle>
       </Container>
       <BlogList />
       <BlogPagination />
