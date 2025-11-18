@@ -30,8 +30,7 @@ export default async function TrainingAndEventsPage() {
       ) }
 
       { trainingEvents.length > 0 && (
-        <PageSection>
-          <h4>Training Events</h4>
+        <PageSection title="Training Events">
           <PageList className="training-events-page__events-list">
             { trainingEvents.map(event => (
               <Box
@@ -61,8 +60,7 @@ export default async function TrainingAndEventsPage() {
       ) }
 
       { otherEvents.length > 0 && (
-        <PageSection>
-          <h4>Other Events</h4>
+        <PageSection title="Other Events">
           <PageList className="training-events-page__events-list">
             { otherEvents.map(event => (
               <Box

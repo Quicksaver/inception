@@ -57,8 +57,7 @@ export default async function ConsortiumPage() {
       ) }
 
       { beneficiaries.length > 0 && (
-        <PageSection>
-          <h4>Beneficiaries</h4>
+        <PageSection title="Beneficiaries">
           <PageList className="consortium-page__beneficiaries-list">
             { beneficiaries.map(item => (
               <Box
@@ -95,8 +94,7 @@ export default async function ConsortiumPage() {
       ) }
 
       { partners.length > 0 && (
-        <PageSection>
-          <h4>Associated Partners</h4>
+        <PageSection title="Associated Partners">
           <PageList className="consortium-page__partners-list">
             { partners.map((partner, idx) => (
               <Box
