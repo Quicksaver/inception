@@ -15,12 +15,6 @@ export const siteSettingsType = defineType({
     title({
       description: 'The title of the website. Appears in the browser tab and search engine results.',
     }),
-    defineField({
-      description: 'A short phrase that describes the website. Appears in the header and in some pages in the browser tab.',
-      name: 'tagline',
-      title: 'Tagline',
-      type: 'string',
-    }),
     description({
       description: 'A snippet summarizing the website, typically around 160 characters. It appears under the page title in search engine results.',
     }),

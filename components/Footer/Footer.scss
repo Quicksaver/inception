@@ -56,12 +56,6 @@
   .logo {
     height: var(--sp-7);
   }
-
-  .tagline {
-    @include breakpoint(until-mobile) {
-      font-size: var(--font-size-body-small);
-    }
-  }
 }
 
 .footer__brand {
