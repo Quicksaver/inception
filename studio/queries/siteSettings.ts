@@ -5,6 +5,10 @@ import clientFetch from 'studio/lib/fetch';
 export const querySiteSettings = defineQuery(`
   *[_type == 'siteSettings' && _id == 'siteSettings'][0] {
     ...,
+    "disclaimerImages": disclaimerImages[] {
+      ...,
+      "asset": asset->
+    },
     "shareimage": {
       ...shareimage,
       "asset": shareimage.asset->
