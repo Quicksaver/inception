@@ -6,7 +6,9 @@ import {
   type UrlRule,
 } from 'sanity';
 
+import alt from '../fields/alt';
 import description from '../fields/description';
+import image from '../fields/image';
 import shareimage from '../fields/shareimage';
 import title from '../fields/title';
 
@@ -161,6 +163,28 @@ export const siteSettingsType = defineType({
         },
       ],
       type: 'array',
+    }),
+    defineField({
+      name: 'disclaimerMessage',
+      title: 'Disclaimer Message',
+      type: 'body',
+    }),
+    defineField({
+      name: 'disclaimerImages',
+      of: [
+        image({
+          description: 'Vector image (SVG) are ideal, PNG/WEBP with good resolution are also accepted. Transparent background preferred.',
+          fields: [
+            alt(),
+          ],
+        }),
+      ],
+      title: 'Disclaimer Images',
+      type: 'array',
+      validation: rule => [
+        rule.required(),
+        rule.min(1),
+      ],
     }),
     defineField({
       name: 'footerMessage',

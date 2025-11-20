@@ -5,13 +5,13 @@
   display: flex;
   grid-area: navigation;
   gap: var(--sp-12);
+  align-self: start;
   justify-content: flex-start;
   padding-left: var(--sp-14);
   border-left: 1px solid alpha(var(--color-text-secondary), 0.2);
 
   @include breakpoint(until-desktop) {
     flex-wrap: wrap;
-    justify-content: center;
   }
 
   @include breakpoint(until-portrait) {

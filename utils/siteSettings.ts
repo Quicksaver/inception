@@ -11,6 +11,7 @@ export const defaultSiteSettings: NonNullable<QuerySiteSettingsResult> = {
   _type: 'siteSettings',
   _updatedAt: '',
   description: '',
+  disclaimerImages: [],
   shareimage: {
     _type: 'image',
     asset: null,

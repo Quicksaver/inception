@@ -11,13 +11,13 @@
   .container {
     position: relative;
     display: grid;
-    grid-template-areas: 'brand navigation' 'divider divider' 'copyright copyright';
-    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    grid-template-areas: 'brand navigation disclaimer' 'divider divider divider' 'copyright copyright copyright';
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--sp-10) var(--sp-14);
     justify-items: start;
 
     @include breakpoint(until-portrait) {
-      grid-template-areas: 'brand' 'navigation' 'divider' 'copyright';
+      grid-template-areas: 'brand' 'navigation' 'disclaimer' 'divider' 'copyright';
       grid-template-columns: minmax(0, 1fr);
     }
   }
@@ -68,5 +68,47 @@
   @include breakpoint(until-desktop) {
     align-items: flex-start;
     width: 100%;
+  }
+}
+
+.footer__disclaimer {
+  display: flex;
+  grid-area: disclaimer;
+  flex-direction: column;
+  gap: var(--sp-3);
+  align-items: end;
+
+  @include breakpoint(until-portrait) {
+    align-items: start;
+  }
+
+  .sanity-body {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    text-align: right;
+
+    @include breakpoint(until-portrait) {
+      text-align: left;
+    }
+  }
+
+  .ornament-text {
+    margin-block-end: var(--sp-7);
+    margin-inline: auto;
+
+    @include breakpoint(portrait) {
+      display: none;
+    }
+  }
+}
+
+.footer__disclaimer-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+
+  .footer__disclaimer-image {
+    width: auto;
+    height: var(--sp-24);
   }
 }
