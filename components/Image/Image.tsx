@@ -5,7 +5,12 @@ import NextImage, {
   type StaticImageData,
 } from 'next/image';
 import {
-  useCallback, useEffect, useMemo, useState,
+  type Ref,
+  type SyntheticEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
 import { create } from 'zustand';
 
@@ -14,6 +19,7 @@ import useWindowSize from 'hooks/useWindowSize';
 import { remotePatterns } from 'next.config';
 import { type ImageSrcSanity } from 'studio/schema/fields/image';
 import breakpoints, { type BreakpointKey } from 'utils/breakpoints';
+import createSyntheticEvent from 'utils/createSyntheticEvent';
 
 const keys = Object.keys(breakpoints) as BreakpointKey[];
 
@@ -30,6 +36,7 @@ export interface ImageProps extends Omit<NextImageProps, 'sizes' | 'src'> {
   maxWidth?: null | number;
   minWidth?: null | number;
   onCurrentSrcChange?: ((src: null | string) => void) | null;
+  ref?: Ref<HTMLImageElement>;
   sizes?: string | undefined | {
     condition?: ImageSizesCondition;
     size: ImageSizesSize;
@@ -47,7 +54,10 @@ export default function Image({
   maxWidth = null,
   minWidth = null,
   onCurrentSrcChange = null,
+  onError: onErrorProp,
+  onLoad: onLoadProp,
   preload = false,
+  ref: refProp = null,
   sizes = undefined,
   src = '',
   style,
@@ -134,12 +144,16 @@ export default function Image({
 
   const failedSrc = useMemo(() => failedSrcs.includes(realSrc), [ failedSrcs, realSrc ]);
 
-  const onLoad = useCallback((event: React.SyntheticEvent) => {
+  const onLoad = useCallback((event: SyntheticEvent<HTMLImageElement>) => {
     setFailed(false);
-    setCurrentSrc((event.target as HTMLImageElement).currentSrc);
-  }, []);
+    setCurrentSrc(event.currentTarget.currentSrc);
 
-  const onError = useCallback(() => {
+    if (onLoadProp) {
+      onLoadProp(event);
+    }
+  }, [ onLoadProp ]);
+
+  const onError = useCallback((event: SyntheticEvent<HTMLImageElement>) => {
     setFailed(true);
 
     if (realSrc) {
@@ -150,7 +164,11 @@ export default function Image({
         ],
       });
     }
-  }, [ realSrc ]);
+
+    if (onErrorProp) {
+      onErrorProp(event);
+    }
+  }, [ onErrorProp, realSrc ]);
 
   const imgStyle = useMemo(() => {
     const _style = { ...style };
@@ -254,12 +272,28 @@ export default function Image({
     onCurrentSrcChange?.(pure ? realSrc : currentSrc);
   }, [ currentSrc, onCurrentSrcChange, realSrc, pure ]);
 
+  const ref = useCallback((element: HTMLImageElement | null) => {
+    if (element?.complete) {
+      onLoad(createSyntheticEvent<HTMLImageElement>('load', element));
+    }
+
+    if (refProp) {
+      if (typeof refProp === 'function') {
+        refProp(element);
+      }
+      else {
+        // eslint-disable-next-line react-hooks/immutability
+        refProp.current = element;
+      }
+    }
+  }, [ onLoad, refProp ]);
+
   if (src && Array.isArray(src)) {
     let lastBreakpoint: BreakpointKey | undefined;
 
     return src.map(([ arrSrc, maxBreakpoint ]) => {
       const currentLastBreakpoint = lastBreakpoint;
-      // eslint-disable-next-line react-hooks/immutability
+
       lastBreakpoint = maxBreakpoint;
 
       const _arrSrc = (arrSrc && ((arrSrc as StaticImageData).src || (arrSrc as ImageSrcSanity).asset?.url || arrSrc as string)) || '';
@@ -272,7 +306,10 @@ export default function Image({
           maxWidth={ breakpoints[maxBreakpoint] }
           minWidth={ currentLastBreakpoint ? breakpoints[currentLastBreakpoint] : undefined }
           onCurrentSrcChange={ onCurrentSrcChange }
+          onError={ onErrorProp }
+          onLoad={ onLoadProp }
           preload={ preload }
+          ref={ refProp }
           sizes={ sizes }
           src={ arrSrc }
           style={ style }
@@ -301,11 +338,12 @@ export default function Image({
       <img
         alt={ alt }
         loading={ preload ? 'eager' : 'lazy' }
-        onError={ onError }
-        onLoad={ onLoad }
         src={ realSrc }
         style={ imgStyle }
         { ...props }
+        onError={ onError }
+        onLoad={ onLoad }
+        ref={ ref }
       />
     );
   }
@@ -313,12 +351,13 @@ export default function Image({
   return (
     <NextImage
       alt={ alt }
-      onError={ onError }
-      onLoad={ onLoad }
       preload={ preload }
       sizes={ realSizes }
       { ...options }
       { ...props }
+      onError={ onError }
+      onLoad={ onLoad }
+      ref={ ref }
     />
   );
 }
