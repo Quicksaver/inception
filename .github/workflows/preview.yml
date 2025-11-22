@@ -10,11 +10,13 @@ on:
   workflow_dispatch:
     inputs:
       environments:
-        description: One of `production`
-        required: false
-        type: environment
+        description: Environment to create preview
+        options:
+          - production
+        required: true
+        type: choice
       prefix:
-        default: pr-
+        default: manual-
         description: The prefix identifier for this job; i.e. `pr-123`
         required: true
 

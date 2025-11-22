@@ -7,10 +7,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        type: environment
-        description: One of `production`
-        required: true
         default: production
+        description: Environment to deploy to
+        options:
+          - production
+        required: true
+        type: choice
 
 permissions:
   contents: read
